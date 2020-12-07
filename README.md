@@ -1,6 +1,6 @@
 # Project Tracker App
 
-This MERN Stack Project is about to have one workspace to manage and track your project's process based on Role Based Control. and you can use CRUD operation to maintain your project.
+This MERN Stack Project is about having one workspace to manage and track your project's process depending on Role Based Control. You can use CRUD operations to maintain your project.
 
 ## How to run it 
 
