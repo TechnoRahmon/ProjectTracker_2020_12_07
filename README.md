@@ -19,7 +19,7 @@ This project is about to have one workspace to manage and track your project's p
     ### `npm install`
 
  *  Now from terminal in the main folder you should run the App using:
-    ### `npm start command`
+    ### `npm start `
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
