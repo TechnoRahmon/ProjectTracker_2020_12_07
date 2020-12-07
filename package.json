@@ -1,0 +1,17 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client":"npm start --prefix client",
+    "Backend":"npm start --prefix Backend",
+    "start": "concurrently \"npm run client\" \"npm run Backend\""
+    
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
