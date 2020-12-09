@@ -1,6 +1,6 @@
 # Project Tracker App
 
-This project is about to have one workspace to manage and track your project's process based on Role Based Control. and you can use CRUD operation to maintain your project.
+This MERN Stack Project is about having one workspace to manage and track your project's process depending on Role Based Control. You can use CRUD operations to maintain your project.
 
 ## How to run it 
 
@@ -19,7 +19,7 @@ This project is about to have one workspace to manage and track your project's p
     ### `npm install`
 
  *  Now from terminal in the main folder you should run the App using:
-    ### `npm start command`
+    ### `npm start `
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
