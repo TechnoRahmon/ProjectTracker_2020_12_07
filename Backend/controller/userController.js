@@ -170,8 +170,8 @@ exports.inviteUser = async (req, res ,next)=>{
         
         //check the eamil 
         const user =await isEmailExistInAccount(email,req.user.account_id.name)
-        //console.log(user);
-        if ( user.length && user.verfied) return res.status(400).json({ success:false , msg:'This Email is already registered in '+req.user.name+' account'})
+        console.log(user);
+        if ( (user.length>0 )&& (user[0].verified)) return res.status(400).json({ success:false , msg:'This Email is already registered in '+req.user.account_id.name+' account'})
         
 
         //console.log(req.user.account_id.name)
@@ -274,7 +274,7 @@ exports.sendInvitation= async (req, res ,next)=>{
                 if(err) return res.status(400).json({ success:false, error : 'MailError : '+err})
 
 
-                console.log("Email Sent: " + info.response);
+                //console.log("Email Sent: " + info.response);
         return res.status(200).json({ 
             success:true , 
             msg:"invitation is successfully Send ", 
