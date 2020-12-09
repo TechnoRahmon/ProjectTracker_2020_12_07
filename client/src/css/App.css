@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;700&display=swap');
+
+/* for headers */
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+/* font-family: 'Play', sans-serif; */
+
+/* 
+COLOR : 
+
+BLue : #304ffe  indigo accent-4
+
+For text/
+    dark blue: #263238  blue-grey-text  text-darken-4
+ */
+
+ *{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+    
+}
+
+.App{
+    width: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-size: 18px;
+    margin:0px !important;
+    padding:0px !important; 
+}
+
+
+
+
+/* NAV BAR */
+.title{
+    width:50%;
+    text-align: center;
+    display: none;
+    font-size: xx-large;
+}
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    padding: 0px !important;
+    
+}
+
+nav{
+    height: 60px !important;
+    overflow: hidden;
+    
+}
+.navbar-fixed{
+    margin-bottom: 0px !important;
+    height: 60px !important;
+}
+.navbar li a{
+    font-weight: 400;
+    font-size: 1.2em !important;
+}
+.activeNav{
+    background-color: #2b3a41 !important;
+}
+
+.logout-link:hover{
+    background-color: #304ffe !important;
+}
+/* sidnav for mobile*/
+
+.sidenav{
+    width: 200px !important;
+}
+.mobile-nav-section{
+    display: none;
+}
+/**************************/
+
+/* Headers */
+h1,h2,h3,h4{
+    font-family: 'Play', sans-serif;
+}
+h2{
+    margin-bottom: 40px;
+    font-size: 240%;
+    font-weight: 700;
+}
+
+
+/**************************/
+
+
+/* Grid styl : container , ROW */
+
+        .container{
+            width:100%;
+
+
+        }
+        .row{
+            width:100%;
+        }
+/**************************/

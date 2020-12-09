@@ -1,0 +1,131 @@
+
+
+
+/*1200 to 1024  */
+@media only screen and (max-width:1200px){
+    
+/* 
+.home-row{
+}
+ */
+
+
+
+
+
+
+
+
+}
+
+
+
+/*768 to 1023*/
+@media only screen and (max-width:1023px){
+
+
+    nav{
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    .title{
+        width:100%;
+        text-align: right !important;
+        display: inline-block !important;
+    }
+    .side_bar_menu{
+        float: right;
+    }
+
+    .img-section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin:10px auto !important;
+        width: 100% !important;
+    
+    }
+    
+    .img_box{
+        border-radius: 50%;
+        width:300px;
+        height:300px;
+        overflow: hidden;
+        display: flex;
+    
+    }
+    .mobile-nav-section{
+        display: flex !important;
+    }
+
+
+
+    /* Resume Page */
+        /*upload form*/
+        .Details {
+ 
+          padding:5px;
+           padding:10px !important;
+          }
+          
+          .Details p{
+ 
+      
+           padding:10px !important;
+          }
+
+          .about-content h2{
+              margin:5px !important;
+          }
+        .about-content{
+            margin: 0px !important;
+            padding:10px !important;
+            height: auto !important;
+          }
+          .Box-education{
+            width:100%;
+            padding:5px  !important;
+            
+            font-size: 120%;
+            color:#fff;
+          }
+     
+          .list{
+              width:100% !important;
+              padding: 0px !important;
+          }
+}
+
+
+/*481 to 767        this is the requier for Assignment*/ 
+@media only screen and (max-width:767px){
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+/* 0 to 480 */
+@media only screen and (max-width:480px){
+
+
+
+
+
+
+
+
+
+
+
+    
+}

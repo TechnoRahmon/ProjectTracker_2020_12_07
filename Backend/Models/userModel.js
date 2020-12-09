@@ -5,12 +5,15 @@ const Email = mongoose.SchemaTypes.Email;
 
 const Schema = mongoose.Schema; 
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
     
-    firstname:{ type:String , requierd:true },
-    lastname:{ type:String , requierd:true },
-    email:{ type:Email , requierd:true , correctTld:true , unique:true },
-    password: { type:String , requierd:true }
+    fullname:{type:String },
+    email:{ type:Email , requierd:true , correctTld:true , trim:true },
+    password: { type:String  },
+    image_path: { type:String },
+    account_id:{type:Schema.Types.ObjectId , ref:'Accounts'},
+    user_type : { type:String , require:true, default:'AdminUser', enum:['ViwerUser','BasicUser','AdminUser']},
+    verified:{type:Boolean, default:false}
 })
 
-module.exports = mongoose.model('Users',UserSchema)
+module.exports = mongoose.model('Users',userSchema)

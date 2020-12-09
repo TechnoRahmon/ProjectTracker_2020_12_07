@@ -1,0 +1,198 @@
+
+
+
+
+
+
+
+
+
+
+
+/**********  Resume PAGE ***********/
+
+
+/* FORM */
+.resume-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:20px !important;
+    width: 100%;
+}
+
+.file-field input{
+  width: 40% !important;
+}
+/* PDF FILE */
+.react-pdf__Page__canvas{
+    margin:0px auto!important;
+    
+}
+
+.Resume{
+  max-width: 85% !important;
+}
+.pdf-warper{
+    position: relative;
+    overflow: hidden !important;
+   
+}
+
+.resume-btn-box{
+
+    display: flex;
+   justify-content: flex-end;
+   align-items: flex-start;
+    padding:20px;
+    width:20px;
+}
+.resume-btn-box button{
+        margin-left: 10px;
+}
+/**************************************************/
+
+
+/**********  Add New Project PAGE ***********/
+
+.addProjectForm input,.addProjectForm textarea{
+    border:1px solid #005eed !important;
+    border-radius: 10px !important;
+    margin-top: 10px;
+     padding-left: 20px !important;
+     width:90% !important;
+}
+.addProjectForm textarea{
+    padding:15px !important;
+    width: 94% !important;
+    row-gap: 30px !important;
+}
+
+/* INPUT Styling */
+
+#desLabel{
+    
+    margin-top:8px !important;
+    margin-left: 10px !important;
+}
+  /* label color */
+  .input-field label {
+    color: #005eed !important;
+    padding-left: 6.6% !important;
+
+    }
+
+  /* valid color */
+  .input-field input.valid ,.input-field textarea.valid {
+    border: 1px solid rgb(8, 180, 59) !important;
+    box-shadow: 0 1px 0 0 rgb(8, 180, 59) !important;
+  }
+  /* invalid color */
+  .input-field input.invalid,.input-field textarea.invalid {
+    border: 1px solid rgb(255, 23, 73) !important;
+    box-shadow: 0 1px 0 0 rgb(255, 23, 73) !important;
+  }
+  .input-field input.invalid +label ,.input-field textarea.invalid +label {
+   color:rgb(255, 23, 73) !important;
+   background-color: transparent;
+  }
+  .input-field input.valid +label ,.input-field textarea.valid +label {
+   color:rgb(8, 180, 59) !important;
+  }
+
+  .file-path-wrapper{
+      padding-left: 1px !important;
+  }
+  
+/**************************************************/
+
+
+
+
+/**********  About ***********/
+.About{
+  height: auto;
+  padding:0;
+  margin:40px 0;
+  width: 100%;
+}
+.sid-background{
+      background-image:linear-gradient(rgba(149, 149, 149, 0.061), rgba(39, 39, 39, 0.788)),
+       url("https://images.unsplash.com/photo-1597075095391-f15c2f9f359a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=635&q=80");
+       background-size: cover;
+       background-position: top;
+       background-repeat: no-repeat;
+       height:150vh ;
+}
+ .Box-education{
+  width:100%;
+  padding:0px ;
+  
+  font-size: 120%;
+  color:#fff;
+}
+.Box-education li{
+  margin-top: 20px;
+}
+.Box-education  h1{
+ 
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  margin-bottom: 20px !important;
+}
+
+.Details{
+  color:#fff;
+}
+.Details p{
+ 
+  line-height: 1.8;
+  width: 100%;
+  text-align: justify;
+ padding:10px;
+}
+.list li{
+    margin-bottom:40px;
+    padding-left: 30px;
+}
+
+.list{
+  padding: 0px 20px !important;
+  color : rgb(32, 32, 32);
+  font-size: large;
+  text-align: left;
+  width:85%;
+  margin:0 auto;
+}
+.list span{
+  line-height: 1.7;
+}
+.list span{
+  margin: 30px 20px 40px 0px !important;
+}
+.about-content{
+  margin-left: 30px !important;
+}
+
+
+
+/* Login Page */
+
+.login-form  input{
+  border : 1px solid #263238 !important;
+  border-radius: 5px;
+  height: 40px;
+  padding-left: 30px !important;
+}
+
+
+.login-form  label{
+color:#263238 !important;
+}
+
+.login-form  input:focus{
+  border : 1px solid #263238 !important;
+  box-shadow: none !important;
+
+}
