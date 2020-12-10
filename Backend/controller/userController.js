@@ -39,9 +39,9 @@ async function isEmailExist(email){
 async function isEmailExistInAccount(email,account_name){
         const account = await Account.findOne({ name : account_name }) ; 
         if (!account) return false
-        console.log('acc : ', account._id);
+        //console.log('acc : ', account._id);
         const user =await Users.find({ email : email , account_id: account._id})
-        console.log('inner func :',user);
+        //console.log('inner func :',user);
         if (user) return user
         return false
 }
@@ -86,11 +86,13 @@ async function createAccount(accountname){
 //********** default route ************
 //@des Get all Users
 //@route Get api/v1
-//@accesss Public
+//@accesss private (allow for all users)
 
 exports.getAllUsers = async (req, res ,next)=>{
         try{
             const users = await Users.find({ account_id : req.user.account_id._id }).populate('account_id','name -_id')
+            if (!users.length) return res.status(404).json({ success:false , error : 'There is No Data Fount'})
+
             return res.status(200).json({ success:true , count: users.length , data: users })
         }
         catch(err){
@@ -170,7 +172,7 @@ exports.inviteUser = async (req, res ,next)=>{
         
         //check the eamil 
         const user =await isEmailExistInAccount(email,req.user.account_id.name)
-        console.log(user);
+        //console.log(user);
         if ( (user.length>0 )&& (user[0].verified)) return res.status(400).json({ success:false , msg:'This Email is already registered in '+req.user.account_id.name+' account'})
         
 
@@ -305,7 +307,7 @@ exports.userAccecptInvitation = async (req, res ,next)=>{
             return res.status(400).json({ success:false , msg:errors[0].msg })
 
         const {  password , fullname} = req.body; 
-        const { id } = req.params;
+        const { userId } = req.params;
 
 
         //hash password
@@ -454,10 +456,11 @@ exports.updateUser = async (req,res,next)=>{
             return res.status(400).json({ success:false , msg:errors[0].msg })
 
         const {role} = req.body
-        const userId = req.params.id; 
-        await Users.findByIdAndUpdate(userId ,{user_type: role})
-        const user = await Users.findById(userId)
-        if (!user) return res.json({error:'User does not exisit'})
+        const {userId} = req.params; 
+        await Users.findOneAndUpdate({_id:userId , account_id:req.user.account_id._id} ,{user_type: role})
+        // retrieve the data to return it 
+        const user = await Users.findOne({_id:userId , account_id:req.user.account_id._id})
+        if (!user) return res.status(404).json({error:'User does not exisit'})
 
         return res.status(200).json({
             data:user

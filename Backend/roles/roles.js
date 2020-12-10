@@ -4,18 +4,35 @@ const ac = new AccessControl()
 
 exports.roles = (()=>{
 
+
+    ac.grant("ViwerUser")
+    .readAny('profile')
+    .readAny('project')
+    .readAny('task')
+
+    
     ac.grant("BasicUser")
-    .updateAny('book',['rate'])
+    .extend('ViwerUser')
+    .updateAny('task')
     
 
     ac.grant("AdminUser")
-    .readAny('profile')
-    .updateAny("profile")
-    .deleteAny("profile")
-    
-    .createAny("book")
-    .updateAny("book")
-    .deleteAny("book")
+        .extend('ViwerUser')
+        .extend('BasicUser')
+
+        // Users
+        .createAny("invite")
+        .deleteAny("profile")
+        .updateAny("profile")
+        // projects
+        .createAny("project")
+        .deleteAny("project")
+        .updateAny("project")
+        // tasks
+        .createAny("task")
+        .deleteAny("task")
+        .updateAny("task")
+
     
     return ac;
 })();

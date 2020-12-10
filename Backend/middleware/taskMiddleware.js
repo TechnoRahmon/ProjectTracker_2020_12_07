@@ -3,19 +3,18 @@ const multer = require('multer')
 
 
 
-// resume validator
-const resumeValidate = [
-    check('name')
-        .notEmpty().withMessage('The Name Should Not Be Empty')
-        .bail()
-        .isString().withMessage('The Name Should Be String'),
-    check('path')
-        .notEmpty().withMessage('The Path Should Not Be Empty')
-        .bail()
-        .isString().withMessage('The Path Should Be String')
-        ,
-]
+// update task validator
+const updateTaskValidator = [
 
+    check("start_date")
+        .custom((value,{req})=> new Date(req.body.end_date) >= new Date(value)).withMessage('Invalid Timeline Entries'),
+    check("comments")
+        .custom((value,{req})=> {if (value.content){console.log(value.content.length);return Number(value.content.length)<=300}
+                                     else return true}
+        ).withMessage('Content Should Be Maximum 300 letter'),
+
+      //new Date('2020-12-10')>=new Date('2020-12-09')
+]
 
 
 //Uploading File 
@@ -34,6 +33,6 @@ const upload = multer({ storage:Storge , fileFilter : FileFilter });
 
 
 module.exports = {
-    resumeValidate,
+    updateTaskValidator,
     upload
 }

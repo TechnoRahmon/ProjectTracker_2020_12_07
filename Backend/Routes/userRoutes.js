@@ -1,38 +1,36 @@
 const Router = require('express').Router(); 
 const UserController = require('../controller/userController')
+const {AllowIfLogin, grantAccess,} = require('./../middleware/GlobalMiddleware')
 const { addUserValidator , 
-        AllowIfLogin, 
-        grantAccess,
         inviteUserValidator,
         userVerficationValidator,
         updateUserDetails,
         userLoginValidator, } = require('../middleware/userMiddleware')
 
-
 Router
     .route('/users')
         // create account  : public
         .post( addUserValidator ,UserController.addUserDetails)
-        // get all users : private (all users only)
-        .get(AllowIfLogin,UserController.getAllUsers )
+        // get all users : private (all users only [ return less details if user not Admin ])
+        .get(AllowIfLogin,grantAccess('readAny','profile'),UserController.getAllUsers )
         
 Router
     .route('/users/invite')
         // invite   : Admin
-        .post(AllowIfLogin,inviteUserValidator,UserController.inviteUser,UserController.sendInvitation)
+        .post(AllowIfLogin,grantAccess('createAny','invite'),inviteUserValidator,UserController.inviteUser,UserController.sendInvitation)
 
 
 Router
-    .route('/users/:id')
+    .route('/users/:userId')
         // accepting invitation   : public
         .put(userVerficationValidator,UserController.userAccecptInvitation)
 
 
 Router
-    .route('/user/:id')
+    .route('/user/:userId')
         // delete user & update user  : privte AdminUser, and the owner MemberUser
-        .delete(AllowIfLogin,UserController.deleteUser)
-        .put(AllowIfLogin,updateUserDetails,UserController.updateUser) // user_type only the role
+        .delete(AllowIfLogin,grantAccess('deleteAny','profile'),UserController.deleteUser)
+        .put(AllowIfLogin,grantAccess('updateAny','profile'),updateUserDetails,UserController.updateUser) // user_type only the role
 
 
     //login
