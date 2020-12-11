@@ -1,7 +1,7 @@
 import {useReducer} from 'react';
 import axios from 'axios';
-import ResumeContext from './resumeContext';
-import {resumeReducer} from './resumeReducer';
+import TaskContext from './taskContext';
+import {taskReducer} from './taskReducer';
 
 import {    
     GET_RESUMES,
@@ -14,7 +14,7 @@ import {
     LOADDING_ERROR,
     SHOW_SPINNER
 } from '../types';
-import { stat } from 'fs';
+
 
 const ResumeState = ({children})=>{
 
@@ -29,7 +29,7 @@ const ResumeState = ({children})=>{
             
         }
 
-        const [state, dispatch ] = useReducer(resumeReducer,initState)
+        const [state, dispatch ] = useReducer(taskReducer,initState)
 
 
         //get resume
@@ -98,7 +98,7 @@ const ResumeState = ({children})=>{
      }
 
     return(
-        <ResumeContext.Provider value={{
+        <TaskContext.Provider value={{
             resumes : state.resumes,
             error : state.error,
             success: state.success,
@@ -109,7 +109,7 @@ const ResumeState = ({children})=>{
         }}>
 
             {children}
-        </ResumeContext.Provider>
+        </TaskContext.Provider>
     )
 }
 

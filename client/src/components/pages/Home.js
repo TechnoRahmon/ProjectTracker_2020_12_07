@@ -10,32 +10,32 @@ import  '../../css/mediaQ/MQHome.css';
 
 const Home = () => {
 
-  const { Token , isTokenValid , isauthenticated,isLoading} = useContext(AuthContext);
-  const { getArticle, error } = useContext(ArticleContext);
+  // const { Token , isTokenValid , isauthenticated,isLoading} = useContext(AuthContext);
+  // const { getArticle, error } = useContext(ArticleContext);
 
-  useEffect(()=>{
-    isTokenValid(Token)
-    getArticle();
+  // useEffect(()=>{
+  //   isTokenValid(Token)
+  //   getArticle();
 
-  },[Token])
+  // },[Token])
 
 // console.log('isauthenticated :', isauthenticated , 'isLoading :',isLoading);
   return (
   <div className="home ">
-
-    <div className="container home-container">
+        <h1>Home</h1>
+    {/* <div className="container home-container">
         
         <div className="row home-row">
 
 
-            {/* sidbar  */}
+            
             <div className="card side_bar_menu col s12 l2 left hide-on-med-and-down navbar">
               <Sidebar />
             </div>
           
          
 
-            {/* middleCard */}
+            
             <div className="card person_card z-depth-3 col s12 l5 offset-l1 center ">
 
                 <div className="middle_section blue-grey-text  text-darken-4">
@@ -70,12 +70,12 @@ const Home = () => {
 
 
 
-            {/* Mobile sidbar  */}
+    
             <div className="card side_bar_menu col s12 l2 left show-on-small mobile-nav-section">
               <MobilSidebar />
             </div>
 
-            {/* post section */}
+      
             <div className="card right-box col s12 l3 right center">
               <h3 className="blue-grey-text  text-darken-4">
                 <i className="fas fa-blog "></i>
@@ -84,7 +84,7 @@ const Home = () => {
                 <div className="divider"></div>
 
 
-        {/**  render the Add button if the token is valid only**/}
+        
         {Token?<AddArticleBtn/>:null}
              
 
@@ -95,7 +95,7 @@ const Home = () => {
             </div>
 
         </div>
-    </div>
+    </div> */}
   </div>
   );
 };

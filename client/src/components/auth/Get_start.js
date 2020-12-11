@@ -1,38 +1,31 @@
-
 import React ,{ useState , useContext , useEffect } from 'react';
 import { useHistory , Link } from 'react-router-dom';
-import { useCookies  } from 'react-cookie';
 import AuthContext from '../../context/auth/authContext';
-import RedirectToProfile from '../Route/profile/RedirectToProfile';
 import '../../css/styleV2.css'
 
-const Login = () => {
-    
+
+
+const Get_start = () => {
+
+
+
     const history = useHistory()
-
-
     //importing from AuthProvider 
-    const {login, isauthenticated, error , cleanStateError, currentUser} = useContext(AuthContext)
+    const {login, isauthenticated, error , cleanStateError } = useContext(AuthContext)
     const [email , setEmail ] = useState('')
     const [pass , setPass ] = useState('')
     const [err , setErr ] = useState('')
+    const [fullname , setFullname ] = useState('')
     const [accountName , setAccountName ] = useState('')
 
 
     useEffect(() => {
-
-        console.log(isauthenticated, currentUser);
-
-        if(isauthenticated){
-            //console.log(currentUser);
-            history.push(`/boards/${currentUser.account._id}`)
-        
-        } 
+        if(isauthenticated)history.push('/')
         if(error) setErr(error)
-    }, [error,currentUser,history]);
+    }, [error,isauthenticated,history]);
 
 
-    const newLogin = {email : email.toLowerCase() , password:pass, account_name:accountName}
+    const newLogin = {email : email.toLowerCase() , password:pass}
     const _handelSub =(e)=>{
             e.preventDefault(); 
             login(newLogin)
@@ -42,16 +35,18 @@ const Login = () => {
         setErr('')
         setPass('')
         setEmail('')
-        setAccountName('')
         cleanStateError()
         
     }
+
+
+
     return (
-        <div className="container">
+          <div className="container">
 
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
-                    <h4>Login</h4>
+                    <h4>Get Start</h4>
                     </div>
                 </div>
 
@@ -74,6 +69,12 @@ const Login = () => {
                      
                             {/* input fields */}
                             <div className="input-field">
+                                <label htmlFor="fullname">Full Name</label>
+                                <input type="text" name="fullname" value={fullname} id="fullname" onChange={(e)=>{setFullname(e.target.value)}} required />
+                                <p className="alert-p" id="demo"></p>
+                            </div>
+
+                            <div className="input-field">
                                 <label htmlFor="email">E-Mail</label>
                                 <input type="email" name="email" value={email} id="email" onChange={(e)=>{setEmail(e.target.value)}} required />
                                 <p className="alert-p" id="demo"></p>
@@ -91,15 +92,15 @@ const Login = () => {
                                 <p className="alert-p" id="demo"></p>
                             </div>
 
+
                             <div className="input-field">
                                 <button className="btn blue darken-2 z-depth-0">Login</button>
                                 <span className="right">
-                                     <h6>Don't Have an account...
-                                    <Link to="/auth/get-start" onClick={cleanStateError}>Regiser</Link>
+                                     <h6>Already Have an account....
+                                    <Link to="/auth/login" onClick={cleanStateError}>Login</Link>
                                     </h6>
                                 </span>
                             </div>
-
 
                         </form>
 
@@ -113,4 +114,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Get_start;

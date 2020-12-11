@@ -11,7 +11,7 @@ import {
 
 
 
-export const resumeReducer = (state , action)=>{
+export const taskReducer = (state , action)=>{
 
         switch(action.type){
 

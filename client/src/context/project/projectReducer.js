@@ -5,6 +5,7 @@ import {
   DELETE_PROJECT,
   ERROR_PROJECT,
   SHOW_SPINNER,
+  CLEAR_ERROR,
 } from "../types";
 
 export const ProjectReducer = (state, action) => {
@@ -21,7 +22,7 @@ export const ProjectReducer = (state, action) => {
         ...state,
         projects: [action.payload, ...state.projects],
         isLoading: false,//updated to false
-        addSuccess:action.success,//updated 
+        isSuccess:action.success,//updated 
         showSpinner:false , 
       };
     case GET_PROJECT_DETAILS:
@@ -44,9 +45,19 @@ export const ProjectReducer = (state, action) => {
         ...state,
         error: action.payload,
         isLoading:false,//updated to true
-        addSuccess:action.success, //updated
+        isSuccess:action.success, //updated
         showSpinner:false ,
-      };
+      }
+
+    case CLEAR_ERROR:
+        return {
+          ...state,
+          error: null,
+          isLoading: true,//updated to true
+          isSuccess:null, //updated
+          
+        }
+
 
     case SHOW_SPINNER:
       console.log('show spinner reducer');

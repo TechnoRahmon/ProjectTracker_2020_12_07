@@ -1,4 +1,5 @@
 import{
+    GET_USER,
  USER_LOGIN  ,
  USER_LOGOUT ,
  VALID_TOKEN ,
@@ -13,9 +14,11 @@ export const Reducer = (state, action )=>{
                 
         default : return state
         
-  
+        case GET_USER:
+            return { ...state, userDetails : action.payload }
+        
         case USER_ERROR: 
-            return { ...state , error : action.payload , isauthenticated : action.auth ,currentUser:[],isLoading:false}
+            return { ...state , error : action.payload , isauthenticated : action.auth ,currentUser:{},isLoading:false}
 
      
         case CLEAR_ERROR:
@@ -28,9 +31,9 @@ export const Reducer = (state, action )=>{
 
         case USER_LOGIN:
             return { ...state , Token :action.tokenload , isauthenticated: action.auth,
-                    error : '',isLoading:false }
+                    error : '',isLoading:false ,currentUser: action.payload}
         
         case USER_LOGOUT: 
-            return{ ...state , isauthenticated: action.auth , currentUser:[] ,isLoading:false}
+            return{ ...state , isauthenticated: action.auth ,Token:'', currentUser:{} ,isLoading:false}
      }
 }

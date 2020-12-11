@@ -23,7 +23,7 @@ const grantAccess = (action, resource)=>{
                 console.log('PERMISSION IS '+permission.granted);
                 //if permission not granted
                 if(!permission.granted){
-                    return res.status(401).json({error:'You don\'t have enough permission to preform this action'})
+                    return res.status(401).json({success:false , error:'You don\'t have enough permission to preform this action'})
                     
                     
                 }else {  

@@ -26,8 +26,12 @@ For text/
     font-family: 'Cairo', sans-serif;
     font-size: 18px;
     margin:0px !important;
-    padding:0px !important; 
+    padding:0px !important;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
 
 
 
@@ -40,8 +44,7 @@ For text/
     font-size: xx-large;
 }
 .navbar{
-    display: flex;
-    justify-content: space-around;
+
     padding: 0px !important;
     
 }

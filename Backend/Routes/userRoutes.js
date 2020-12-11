@@ -32,14 +32,20 @@ Router
         .delete(AllowIfLogin,grantAccess('deleteAny','profile'),UserController.deleteUser)
         .put(AllowIfLogin,grantAccess('updateAny','profile'),updateUserDetails,UserController.updateUser) // user_type only the role
 
-
     //login
 Router 
     .route('/login')
         .post(userLoginValidator,UserController.userLogin)
+    
+    //logout
+Router 
+    .route('/logout')
+        .get(UserController.logout)
+
+
  //Token validation
 Router 
     .route('/valid')
-        .post(UserController.isTokenValid)
+        .get(UserController.isTokenValid)
     
 module.exports = Router;

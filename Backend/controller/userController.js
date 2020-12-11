@@ -37,10 +37,10 @@ async function isEmailExist(email){
 }
 
 async function isEmailExistInAccount(email,account_name){
-        const account = await Account.findOne({ name : account_name }) ; 
+        const account = await Account.findOne({ name : account_name })
         if (!account) return false
         //console.log('acc : ', account._id);
-        const user =await Users.find({ email : email , account_id: account._id})
+        const user =await Users.find({ email : email , account_id: account._id}).populate('account_id','name') ;
         //console.log('inner func :',user);
         if (user) return user
         return false
@@ -376,9 +376,12 @@ exports.userLogin = async (req, res ,next)=>{
         return res.status(200).json({ 
             success:true ,
             token, 
-            user:{fullname:user[0].fullname , 
+            user:{
+                id:user[0]._id,
+                fullname:user[0].fullname , 
                 image_path: user[0].image_path, 
                 user_type :user[0].user_type,
+                account:user[0].account_id, 
                }
             })
     }
@@ -389,28 +392,49 @@ exports.userLogin = async (req, res ,next)=>{
 }
 
 
+
+
+
+
+exports.logout = async (req,res,next)=>{
+    // Set token to none and expire after 5 seconds
+    res.cookie('token', 'none', {
+        expires: new Date(Date.now() + 1 * 1000),
+        httpOnly: true,
+        })
+
+        res.status(200).json({ success:true, msg:'User logged out successfully'})
+}
+
+
+
+
+
+
+
 //********** valid token  ********** 
 //@des Check token validation
-//@route Post api/v1/valid
+//@route GET api/v1/valid
 //@accesss Public
 exports.isTokenValid = async(req,res,next)=>{
     try{
         const token =  req.cookies['token'];
-        //console.log('token from controller : '.green ,token,'*'.green);
+        console.log('token from controller : '.green ,token,'*'.green);
         if (!token) return res.status(401).json(false)
 
         const verified = jwt.verify(token , process.env.TOKEN)
         if(!verified) return res.status(401).json(false)
 
-        const user = await Users.findById(verified.userId)
+        let user = await Users.findById(verified.userId).populate('account_id','name')
         if(!user) return res.status(404).json(false)
-
+        //user = await user
         return res.status(200).json({
             success:true,
             user:{
                 id:user._id,
-                firstname : user.firstname,
-                lastname: user.lastname,
+                firstname : user.fullname,
+                account: user.account_id,
+                user_type :user.user_type,
             }
         })
     }

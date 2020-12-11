@@ -10,24 +10,30 @@ import {
   DELETE_PROJECT,
   ERROR_PROJECT,
   SHOW_SPINNER,
+  CLEAR_ERROR,
 } from "../types"; // importing action type
+
+
 const ProjectState = ({children}) => {
+
+
   const initialState = {
     isLoading: true,
-    projects: [], // project_list (id, title, img_url)
-    currentProject: null, // signle project
+    projects: [], // project_list (id, name, accountId)
+    currentProject: {}, // signle project
     error: null,
     showSpinner:false,
-    addSuccess:false, // under testing
+    isSuccess:false, // under testing
   };
 
   const [state, dispacth] = useReducer(ProjectReducer, initialState);
 
-  // loading/ getting projects
 
-  const loadProject = async () => {
+
+  // loading/ getting projects
+  const getProjects = async () => {
     try {
-      const response = await axios.get("/api/v1/projects");
+      const response = await axios.get("/api/v2/projects");
       // console.log("response: ",response)
       dispacth({
         type: GET_PROJECTS,
@@ -39,44 +45,37 @@ const ProjectState = ({children}) => {
     }
   };
 
-  // add/ post project
 
-  const addProject = async (imgFile , projData) => {
-    await StartshowSpinner()  // calling the spinner
-    const form_data = new FormData()
-    form_data.append('name',projData.name)
-    form_data.append('url',projData.url)
-    form_data.append('source_code',projData.source_code)
-    form_data.append('myImage',imgFile)
-    form_data.append('description',projData.description)
+
   
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  // add/ post project
+  const addProject = async () => {
+    await StartshowSpinner()  // calling the spinner
+  
     try {
-      console.log('from state : ',state.showSpinner);
-      const response = await axios.post("/api/v1/projects", form_data, config);
-      //console.log(response.data.success)
+      //console.log('from state : ',state.showSpinner);
+      const response = await axios.post("/api/v2/projects");
+      console.log(response.data.success)
       dispacth({
         type: ADD_PROJECT,
         payload: response.data,
         success:response.data.success, // updated 
       });
 
-      loadProject();
+      getProjects();
     } catch (error) {
-      //console.log('err : ',error.response.data.success );
+      console.log('err : ',error.response );
       dispacth({ type: ERROR_PROJECT, 
-                payload: error.response.data.err ,    
+                payload: error.response.data.error ,    
                 success:error.response.data.success, //updated 
       });
     }
   };
 
-  //getDetail of project
 
+
+
+  //getDetail of project
   const viewProject = async (id) => {
     // console.log("id: "+id)
     try {
@@ -127,7 +126,11 @@ const ProjectState = ({children}) => {
    }
 
    const ClearError = ()=>{
-        state.error = null;
+     dispacth({
+       type:CLEAR_ERROR,
+
+     })
+        
    }
   return (
     <ProjectContext.Provider
@@ -136,9 +139,9 @@ const ProjectState = ({children}) => {
         projects: state.projects,
         currentProject: state.currentProject,
         error: state.error,
-        addSuccess:state.addSuccess,
+        isSuccess:state.isSuccess,
         showSpinner:state.showSpinner,
-        loadProject, // test DONE 
+        getProjects, // test DONE 
         addProject,// test DONE 
         viewProject,// test in Done
         deleteProject,// test in Done
