@@ -28,16 +28,20 @@ const ProjectList = () => {
         }
        // console.log( projects);
        
-        console.log("SearchWord: ",searchWord)
+        // console.log("SearchWord: ",searchWord)
       }, [error, proj,searchWord]);
 
       useEffect(()=>{
         setErr(error)
       },[err])
-const _ClearErrorLabel=(e)=>{
+
+
+    const _ClearErrorLabel=(e)=>{
         ClearError()
         setErr('');
-}
+    }
+
+
     return (
         <ul className="col s12 l1 left  proj-list ">
            {err?
@@ -65,7 +69,7 @@ const _ClearErrorLabel=(e)=>{
               )
             :<li className="center white-text">No Data Found</li>}  
                
-                    <button to="#" className="center btn-floating addProjectbtn"onClick={addProject}>
+                    <button  className="waves-effect waves-light indigo darken-4 btn-floating addProjectbtn"onClick={addProject}>
                         <i className="material-icons ">add</i>
                     </button>
               

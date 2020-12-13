@@ -21,7 +21,7 @@ const taskSchma = new Schema({
 
     name:{type: String, required: true},
 
-    owners:[{ _id :{ type: Schema.Types.ObjectId, ref:"Users"} }], // ref to users model
+    owners:[{ _id :{ type: Schema.Types.ObjectId }, fullname:{type: String}}], // ref to users model
 
     comments:[{ user_id :{ type: Schema.Types.ObjectId, ref:"Users"},
                 content:{type: String ,maxlength: [300, "Content Should Be Maximum 300 Words Only"]},

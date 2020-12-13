@@ -11,6 +11,7 @@ import {
   ERROR_PROJECT,
   SHOW_SPINNER,
   CLEAR_ERROR,
+
 } from "../types"; // importing action type
 
 
@@ -79,11 +80,12 @@ const ProjectState = ({children}) => {
   const viewProject = async (id) => {
     // console.log("id: "+id)
     try {
-      const response = await axios.get("/api/v1/project/"+id);
+      const response = await axios.get("/api/v2/project/"+id);
       // console.log("response: ", response.data.data)
       dispacth({
         type: GET_PROJECT_DETAILS,
         payload: response.data.data,
+        success:response.data.success,
       });
     } catch (error) {
       console.log("Error : ",error.response.data.err)
@@ -95,19 +97,30 @@ const ProjectState = ({children}) => {
 
   const deleteProject = async (id) => {
     try {
-      const response = await axios.delete("/api/v1/project/"+id);
+      const response = await axios.delete("/api/v2/project/"+id);
       dispacth({
         type: DELETE_PROJECT,
         payload: id, // delete object from both db and DOM tree
       });
-    } catch (error) {
+    } catch (err) {
       dispacth({
         type: ERROR_PROJECT,
-        payload: error.response.err.message,
+        payload: err.response.error,
       });
     }
   };
   
+
+    //update project 
+    const updateProject = async(projectId,info) =>{
+          try {
+              const config= { headers : { accept:'application/json'},data:{}}
+              const project = await axios.put(`/api/v2/project/${projectId}`,info, config)
+              viewProject(projectId)
+          } catch (err) {
+                  dispacth({  type: ERROR_PROJECT, payload: err.response.error  });
+          }
+      }
   
   // under testing
   // is adding success
@@ -144,10 +157,11 @@ const ProjectState = ({children}) => {
         getProjects, // test DONE 
         addProject,// test DONE 
         viewProject,// test in Done
-        deleteProject,// test in Done
+        deleteProject,// test 
         StartLoading,
         ClearError,
         StartshowSpinner,
+        updateProject,//test 
       }}
     >
       {children}

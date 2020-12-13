@@ -20,7 +20,7 @@ export const ProjectReducer = (state, action) => {
     case ADD_PROJECT:
       return {
         ...state,
-        projects: [action.payload, ...state.projects],
+        projects: [...state.projects,action.payload ],
         isLoading: false,//updated to false
         isSuccess:action.success,//updated 
         showSpinner:false , 
@@ -30,7 +30,8 @@ export const ProjectReducer = (state, action) => {
       return {
         ...state,
         currentProject: action.payload,
-        isLoading: true,
+        isLoading: false,
+        isSuccess:action.success,
       };
 
     case DELETE_PROJECT:

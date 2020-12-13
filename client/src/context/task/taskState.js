@@ -1,26 +1,28 @@
 import {useReducer} from 'react';
 import axios from 'axios';
 import TaskContext from './taskContext';
-import {taskReducer} from './taskReducer';
+import {TaskReducer} from './taskReducer';
 
 import {    
-    GET_RESUMES,
-    ADD_RESUME,
-    GET_RESUME_DETAILS,
-    DELETE_RESUME,
-    ERROR_RESUME,
-    DOWNLOAD_RESUME,
+    GET_TASKS,
+    ADD_TASK,
+    GET_TASK_DETAILS,
+    DELETE_TASK,
+    ERROR_TASK,
+    DOWNLOAD_TASK,
     LOGGDING_ERROR,
     LOADDING_ERROR,
-    SHOW_SPINNER
+    SHOW_SPINNER,
+    CLEAR_ERROR,
+    UPDATE_TASK
 } from '../types';
 
 
-const ResumeState = ({children})=>{
+const TaskState = ({children})=>{
 
 
         const initState = {
-            resumes : [],
+            tasks : [],
             error :null, //uploadError
             success:false,
             dataLoadingError :null,// data getting Error
@@ -29,62 +31,65 @@ const ResumeState = ({children})=>{
             
         }
 
-        const [state, dispatch ] = useReducer(taskReducer,initState)
+        const [state, dispatch ] = useReducer(TaskReducer,initState)
 
 
-        //get resume
-        const getResume =async ()=>{await StartshowSpinner()
+        //get task
+        const getTasks =async (id)=>{
+            await StartshowSpinner()
             try{
                 
-                const resume = await axios.get('/api/v2/resumes')
-                    dispatch({  type :GET_RESUMES,
-                                payload:resume.data.data,
-                                success:resume.data.success,
+                const task = await axios.get(`/api/v3/project/${id}/tasks`)
+                    dispatch({  type :GET_TASKS,
+                                payload:task.data.data,
+                                success:task.data.success,
                                  })
             }   
             catch(err){
+                console.log(err);
                 dispatch({ type :LOADDING_ERROR, payload:err.response.data.error ,success:err.response.data.succeses})
             }
         }
 
 
 
-    //add new resume
-    const addResume =async (newResume)=>{
+    //add new task
+    const addtask =async (id)=>{
         try{await StartshowSpinner()
-            const config={ headers:{'Content-Type':'multipart/form-data'}} 
-            const resume = await axios.post('/api/v2/resumes',newResume,config)
-                dispatch({ type :ADD_RESUME, payload:resume.data.data ,success:resume.data.success})
+            
+            const task = await axios.post(`/api/v3/project/${id}/tasks`)
+                dispatch({ type :ADD_TASK, payload:task.data.data ,success:task.data.success})
+            getTasks(id)
         }   
         catch(err){
-            dispatch({ type :ERROR_RESUME, payload:err.response.data.error, success:err.response.data.succeses})
+            console.log(err.response);
+            dispatch({ type :ERROR_TASK, payload:err.response.data.error, success:err.response.data.succeses})
         }
     }
 
 
+// update task
+const updateTask = async (NewTask,projectId,taskId) =>{
 
-    //download resume
-    const downloadResume =async (id)=>{
-        try{
-            
-            const resume = await axios.get(`/api/v2/resume/${id}/download`)
-                dispatch({ type :DOWNLOAD_RESUME ,success:resume.data.success})
-        }   
-        catch(err){
-            dispatch({ type :ERROR_RESUME, payload:err.response.data.error ,success:err.response.data.succeses})
-        }
-
+    try {
+        const config= { headers:{ accept:'application/json'}, data:{}}
+        const task = await axios.put(`/api/v3/project/${projectId}/task/${taskId}`,NewTask,config)
+        getTasks(projectId)
+    } catch (err) {
+    dispatch({ type :ERROR_TASK, payload:err.response.data.error ,success:err.response.data.succeses })
     }
+}
 
-    //delete resume
-    const deleteResume =async (id)=>{
+
+    //delete task
+    const deletetask =async (projectId,taskId)=>{
         try{
             
-            const resume = await axios.delete(`/api/v2/resume/${id}`)
-                dispatch({ type :DELETE_RESUME ,payload: id ,success:resume.data.success})
+            const task = await axios.delete(`/api/v3/project/${projectId}/task/${taskId}`)
+                dispatch({ type :DELETE_TASK ,payload: taskId ,success:task.data.success})
         }   
         catch(err){
-            dispatch({ type :ERROR_RESUME, payload:err.response.data.error ,success:err.response.data.succeses })
+            dispatch({ type :ERROR_TASK, payload:err.response.data.error ,success:err.response.data.succeses })
         }
 
     }
@@ -97,15 +102,28 @@ const ResumeState = ({children})=>{
         })
      }
 
+
+     const ClearTaskError = ()=>{
+        dispatch({
+          type:CLEAR_ERROR,
+   
+        })
+           
+      }
     return(
         <TaskContext.Provider value={{
-            resumes : state.resumes,
+            tasks : state.tasks,
             error : state.error,
             success: state.success,
             dataLoadingError: state.dataLoadingError,
             showSpinner:state.showSpinner,
             addSuccess:state.addSuccess,
-            getResume,addResume,deleteResume,downloadResume,StartshowSpinner
+            getTasks,//test DONE
+            addtask,//test DONE
+            deletetask,//test  DONE
+            StartshowSpinner,//test 
+            ClearTaskError,//test,
+            updateTask // test DONE
         }}>
 
             {children}
@@ -113,4 +131,4 @@ const ResumeState = ({children})=>{
     )
 }
 
-export default ResumeState
+export default TaskState

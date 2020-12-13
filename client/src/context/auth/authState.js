@@ -54,9 +54,11 @@ export const AuthState = ({children})=>{
     async function getUserDetails(){
         try{
                 const userResp = await axios.get('/api/v1/users');
+                // console.log('from AuthState : ',userResp.data.data);
                 dispatch({type : GET_USER , payload:userResp.data.data });
         }
         catch(err){
+            console.log(err.response.data.error)
             dispatch({ type:USER_ERROR , payload: err.response.data.error , auth:false })
             }
         }
@@ -126,6 +128,7 @@ export const AuthState = ({children})=>{
             currentUser:state.currentUser,
             registrationSuccess:state.registrationSuccess,
             isSuccess:state.isSuccess,
+            userDetails:state.userDetails,
             //functoins 
             isTokenValid,login,logout,cleanStateError,getUserDetails
         }}>

@@ -31,7 +31,7 @@ const Navbar =({authPath}) => {
 
       if(isauthenticated){
           //console.log(currentUser);
-          history.push(`/boards/${currentUser.account._id}`)
+          history.push(`/boards`)
       
       } 
       

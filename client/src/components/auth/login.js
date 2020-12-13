@@ -25,7 +25,7 @@ const Login = () => {
 
         if(isauthenticated){
             //console.log(currentUser);
-            history.push(`/boards/${currentUser.account._id}`)
+            history.push(`/boards}`)
         
         } 
         if(error) setErr(error)
@@ -51,7 +51,7 @@ const Login = () => {
 
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
-                    <h4>Login</h4>
+                    <h1>Login</h1>
                     </div>
                 </div>
 

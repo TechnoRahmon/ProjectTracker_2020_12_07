@@ -1,48 +1,46 @@
 import {    
-    GET_RESUMES,
-    ADD_RESUME,
-    GET_RESUME_DETAILS,
-    DELETE_RESUME,
-    ERROR_RESUME,
-    DOWNLOAD_RESUME,
+    GET_TASKS,
+    ADD_TASK,
+    GET_TASK_DETAILS,
+    DELETE_TASK,
+    ERROR_TASK,
     LOADDING_ERROR,
-    SHOW_SPINNER
+    SHOW_SPINNER,
+    CLEAR_ERROR
 } from '../types';
 
 
 
-export const taskReducer = (state , action)=>{
+export const TaskReducer = (state , action)=>{
 
         switch(action.type){
 
-            case GET_RESUMES:
+            case GET_TASKS:
                 return{ ...state, 
-                        resumes :action.payload, 
+                        tasks :action.payload, 
                         success : action.success ,
                         showSpinner:false ,}
                 
 
 
-            case ADD_RESUME:
+            case ADD_TASK:
                 return{ ...state, 
-                        resumes :action.payload, 
+                        tasks :[...state.tasks, action.payload], 
                         success : action.success,
                         showSpinner:false ,
                         addSuccess:true }
 
 
-            case DELETE_RESUME:
-                const newResumes = state.resumes.filter(item=> item._id !== action.payload )
+            case DELETE_TASK:
+                const newtasks = state.tasks.filter(item=> item._id !== action.payload )
                 return{ ...state, 
-                        resumes :newResumes, 
+                        tasks :newtasks, 
                         success : action.success } 
 
 
-            case DOWNLOAD_RESUME:
-                break; 
+      
 
-
-            case ERROR_RESUME:
+            case ERROR_TASK:
                 //console.log(action.payload);
                 return{ ...state, 
                     error:action.payload, 
@@ -55,13 +53,23 @@ export const taskReducer = (state , action)=>{
                 return{ ...state, 
                     dataLoadingError:action.payload, 
                     success : action.success ,
-                    showSpinner:false ,}
+                    showSpinner:false ,
+                    tasks:[]}
 
             case SHOW_SPINNER:
                     return{
                     ...state,
                     showSpinner:true,
                     }
+
+                    case CLEAR_ERROR:
+                        return {
+                          ...state,
+                          error: null,
+                          //isLoading: true,//updated to true
+                          success:false, //updated
+                          
+                        }
                     
             default:{
                 return state

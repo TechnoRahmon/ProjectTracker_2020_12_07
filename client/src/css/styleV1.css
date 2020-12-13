@@ -1,6 +1,15 @@
 
 /*********************************** NAV *******************************/
+/*
+    colors 
+  purple:   #5e35b1 deep-purple darken-1
+                            purple darken-4
+  dark grey #212121 grey darken-4
 
+  indigo darken-4
+   dark blue #1c2662;
+   indigo lighten-5
+*/
 
 
 /**** Home ********/
@@ -15,7 +24,7 @@ main{
         background-position: top;
         background-repeat: no-repeat;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         width: 100%;
         height: auto;
@@ -35,7 +44,24 @@ main{
 
 
 /**************** Boards *****************/
-
+.header-box-header{
+    width:100% !important;
+    
+}
+.header-box{
+    padding-bottom:20px;
+    width: 90%!important;
+    margin:30px auto !important;
+    display: flex;
+    border-radius: 20px;
+}
+.divider1{
+    margin:20px 0px ;
+}
+.TimeLineSpan{
+    border-radius: 30px;
+    padding:5px 7px ;
+}
         /****   myPage ******/
     .myPage{
         display: flex;
@@ -44,9 +70,33 @@ main{
         height: 100vh;
         width: 100%;
     }
+/*  project info edit mode */
+.projectNameEdit, .projectDesEdit{
+    display: none;
+    
+}
+.ProjectdropMenu {
+    width:180px !important;
+}
 
 
+.projectNameEdit{
+    margin:60px 0px 25px 0px !important;
+    
+}
 
+
+.projectNameEdit input, .projectDesEdit input{
+        width:80% !important;
+}
+.projName, .projDes{
+    border :1px dashed transparent;
+}
+
+
+.projName:hover, .projDes:hover{
+    border :1px dashed #1c2662;
+}
 /******* vertiacl nav  ******/
 
 .proj-list{
@@ -82,31 +132,111 @@ main{
 .vert-nav-box{
     width:5% !important;
     margin:0 !important;
-   position: relative !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
 }
 
+            /**    invite box  **/
 
+.invite-box{
+  
+        text-align: left;
+        width:35%;
+         position: absolute;
+         top: 40%;
+         left: 50%;
+         transform: translate(-50%,-50%);
+         padding:10px 30px !important;
+         color: rgb(29, 29, 29);
+         z-index: 3;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: flex-start;
+         border-radius: 20px;
+        
+}
+.radioBox:focus{
+    color:#1c2662 !important;
+    background-color: #1c2662 !important;
+}
+
+.background-inviteBox{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1c266267;
+    z-index: 3;
+}
+
+.inputRowInvite{
+    margin-left: 0px !important;
+
+}
+.inputRowInviteCol{
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    padding:20px !important; 
+}
+#newUserEmail{
+    border:1px solid #1c2662 !important;
+    width:80%;
+    padding-left: 20px !important;
+    
+}
+#newUserEmail:focus{
+    border:1px solid #1c2662 !important;
+}
+
+#newUserEmail +label{
+    color: #22242e !important;
+}
+#newUserEmail:focus{
+    border:1px solid #1c2662 !important;
+
+}
+
+.RadioForm{
+    display: flex;
+    justify-content: space-around;
+    margin:0!important;
+    padding:0!important;
+}
+.invite-box h3{
+    width:80%;
+    margin-left: 40px !important;
+}
+.invitButton{
+    margin:40px auto 20px auto  ;
+    width:30%;
+    align-self: flex-start;
+    font-size: large;
+}
 
 .vert-nav-box li .icons{
         margin-top:30px;
-        color : #1d2031;
+        color : #fff;
 }
 
 .account_img_box{
-    border-radius: 50px;
-    width:70px;
+    
+    width:60px;
     height: 70px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin:40px auto 10px auto;
+    position: relative;
 }
 .account_img_box img{
     max-width:100%;
+    border-radius: 50%;
 }
 /******* Board content   ******/
 
@@ -116,6 +246,144 @@ main{
     flex-grow: 1;
     overflow: hidden;
 }
+/******* Board boxes   ******/
+.card-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.box{
+    padding:10px !important;
+}
+
+
+
+
+/******* Tasks List   ******/
+
+.task-box-header{
+    padding:10px 0px ;
+    border-radius: 10px;
+}
+
+.task-box:hover{
+    border: 1px dashed #3b3d469f;
+}
+
+.task-box{
+    border: 1px solid transparent;
+    display: flex;
+    position: relative;
+    padding:15px 0px ;
+    border-radius: 10px;
+}
+
+
+.status-box{
+    width:15% !important; 
+}
+.name-box{
+    width:20% !important;
+    display: flex !important;
+    justify-content: flex-start;
+}
+
+
+._invisible{
+    display: none;
+    align-items: center;
+    justify-content: flex-start !important;
+}
+
+.updateTaskbtn{
+    position: absolute;
+    right: -70px;
+}
+
+.timeLine-box{
+    width:10.5% !important;
+}
+/******* Owner Drop list  ******/
+
+
+.OwnerDropDown{
+    position: absolute;
+    margin-bottom: 40px;
+    width:300px;
+   display:none;
+   height: auto;
+   padding:20px;
+   z-index: 2;
+   
+
+}
+/******** owner Hover Box*********/
+.OwnersHoverBox{
+    position: absolute;
+    padding:20px;
+    width:200px;
+    display: none;
+    z-index: 1;
+    
+}
+
+
+
+
+/**** Tasks delete box   ***/
+
+.delTaskIcon-box{
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+        width:20px;
+        top:0px;
+        bottom: 0px;        
+        position: absolute;
+        left:0px;
+        display: flex;
+        align-items: center;
+      
+}
+.delTaskIcon-box a{
+    display: flex;  justify-content: center;
+        align-items: center;
+        font-size: x-large;
+        padding:10px;
+        
+}
+.delTaskIcon{
+        color:rgb(255, 134, 134);
+        margin-left: 10px;
+        opacity: 0;font-size: 150% !important;
+}
+
+
+
+.delTaskIcon-box:hover {
+    width:50px;
+    left:0px;
+    background-color: #ffffff !important;
+    transition: width 0.1s , left 0.2s ease-out ;
+}
+
+.delTaskIcon-box:hover .delTaskIcon {
+    opacity: 1;
+    margin-left: 0px;
+
+    transition: margin-left 0.5s , opacity 0.1s ease-out ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /******* Error Label  ******/
 
@@ -126,10 +394,10 @@ main{
     left: 0;
     
     width: 100vw;
-    
+    z-index:3 ;
     top:0;
     height: 100%;
-    background-color: #1f202080;
+    background-color: transparent !important;
     display: flex;
     justify-content: center;
     align-items:flex-start;
@@ -154,7 +422,7 @@ main{
     width:60%;
     word-wrap: break-word;
     text-align: justify;
-    z-index: 2;
+    z-index: 3;
     animation: mymove ;
     animation-fill-mode: forwards;
     animation-duration: 0.4s;
@@ -246,7 +514,41 @@ main{
 
 
 
-/***************************************************************/
+/************************* OVER view **************************************/
+.overviewContainer{
+    overflow: auto;
+}
+
+.overView{
+    margin:40px auto !important;
+}
+
+.overviewTitle{
+    padding-bottom: 40px;
+    width:80% !important;
+    border-radius: 10px;
+    margin:40px auto;
+}
+.overveiwDivider{
+    width:80%;
+    margin:0 auto;
+}
+.project-box{
+    display: flex;
+    justify-content: flex-start;
+    margin:20px;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.project-box h2{
+    font-weight: 300;
+}
+.projectNumber{
+    border-radius: 30px;
+    padding:7px 20px ;
+    margin-bottom: 40px;
+}
 /***************************************************************/
 
 /***************** Media Query *************************/

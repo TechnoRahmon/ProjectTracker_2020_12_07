@@ -90,12 +90,14 @@ async function createAccount(accountname){
 
 exports.getAllUsers = async (req, res ,next)=>{
         try{
-            const users = await Users.find({ account_id : req.user.account_id._id }).populate('account_id','name -_id')
+            const users = await Users.find({ account_id : req.user.account_id._id })
+                .populate('account_id','name -_id').select('-password')
             if (!users.length) return res.status(404).json({ success:false , error : 'There is No Data Fount'})
 
             return res.status(200).json({ success:true , count: users.length , data: users })
         }
         catch(err){
+            console.log(err)
             return res.status(500).json({ success:false, error : 'Server Error'})
         }
     }

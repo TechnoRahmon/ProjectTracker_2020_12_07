@@ -10,11 +10,13 @@
 
 import {Switch, Route} from 'react-router-dom';
 import './css/App.css';
+import './css/styleV1.css';
 import PrivateRoute from './components/Route/profile/PrivateRotue';
 import DefaultRoutes from './components/Route/default/DefaultRoutes';
 import AuthRoutes from './components/Route/auth/AuthRoutes';
-import Profile from './components/pages/Boards';
+import Boards from './components/pages/Boards';
 import Buzzes from './components/pages/Buzzes';
+import Overview from './components/pages/Overview';
 
 
 function App() {
@@ -26,8 +28,8 @@ function App() {
       
             <Switch>      
               <PrivateRoute exact path="/boards/:projectId/buzz/:taskId" component={Buzzes}></PrivateRoute>
-              <PrivateRoute exact path="/boards/:projectId" component={Profile}></PrivateRoute>
-              {/* <PrivateRoute exact path="/boards" component={Profile}></PrivateRoute> */}
+              <PrivateRoute exact path="/boards/:projectId" component={Boards}></PrivateRoute>
+              <PrivateRoute exact path="/boards" component={Overview}></PrivateRoute>
               <Route  component={AuthRoutes}  path="/auth"></Route>
               <Route  component={DefaultRoutes}></Route>
 

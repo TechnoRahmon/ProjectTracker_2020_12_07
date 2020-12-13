@@ -1,10 +1,4 @@
 
-/**  ARTICLE ACTIONS **/ 
-export const GET_ARTICLES = 'GET_ARTICLES'
-export const ADD_ARTICLE = 'ADD_ARTICLE'
-export const GET_ARTICLE_DETAILS = "GET_ARTICLE_DETAILS";
-export const DELETE_ARTICLE = "DELETE_ARTICLE";
-export const ERROR_ARTICLE = "ERROR_ARTICLE";
 
 /**  PROJECT ACTIONS **/
 export const GET_PROJECTS = 'GET_PROJECTS'
@@ -13,15 +7,17 @@ export const GET_PROJECT_DETAILS = 'GET_PROJECT_DETAILS'
 export const DELETE_PROJECT = 'DELETE_PROJECT'
 export const ERROR_PROJECT = 'ERROR_PROJECT'
 export const SHOW_SPINNER = 'SHOW_SPINNER'
+export const UPDATE_PROJECT = 'UPDATE_PROJECT'
 
-/** RESUME ACTIONS  **/
-export const GET_RESUMES = 'GET_RESUME'
-export const ADD_RESUME = 'ADD_RESUME'
-export const  GET_RESUME_DETAILS = 'GET_RESUME_DETAILS'
-export const  DELETE_RESUME = 'DELETE_RESUME'
-export const  ERROR_RESUME = 'ERROR_RESUME'
-export const DOWNLOAD_RESUME = 'DOWNLOAD_RESUME'
+/** TASK ACTIONS  **/
+export const GET_TASKS = 'GET_TASK'
+export const ADD_TASK = 'ADD_TASK'
+export const  GET_TASK_DETAILS = 'GET_TASK_DETAILS'
+export const  DELETE_TASK = 'DELETE_TASK'
+export const  ERROR_TASK = 'ERROR_TASK'
+export const DOWNLOAD_TASK = 'DOWNLOAD_TASK'
 export const LOADDING_ERROR = 'LOADDING_ERROR'
+export const UPDATE_TASK = 'UPDATE_TASK'
 
 /** ERROR **/
 export const  SET_ERROR = 'SET_ERROR'
@@ -34,3 +30,4 @@ export const USER_LOGOUT = 'USER_LOGOUT'
 export const VALID_TOKEN = 'VALID_TOKEN'
 export const USER_ERROR = 'USER_ERROR'
 export const GET_USER  = 'GET_USER'
+export const UPDATE_USER = 'UPDATE_USER'

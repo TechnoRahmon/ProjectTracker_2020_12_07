@@ -134,7 +134,7 @@ exports.newTask  = async (req,res,next)=>{
        
         //Task.created_at = 
         const savedTask = await task.save()
-    
+        console.log(savedTask.start_date)
           return res.status(201).json({ 
             success: true, 
             data: { _id : savedTask._id , 
@@ -177,7 +177,7 @@ exports.updateTask =  async function (req, res,next) {
     //find the task
     let task = await (await Task.findOne({_id : taskId, project_id: projectId , account_id : req.user.account_id._id}))
     if (!task) return res.status(404).json({error:'task does not exist in '+req.user.account_id.name+' account'})
-    task=task.populate('owners','_id')
+    task=task.populate('owners','name')
     const isOwner = await isOwnerExist(task,req.user._id) ; 
 
        //console.log('isOwner',isOwner)
@@ -224,7 +224,7 @@ exports.sendUpdateRes =async (req,res,next)=>{
     
 
     //find the task
-    let task = await Task.findOne({_id : taskId, project_id: projectId , account_id : req.user.account_id._id})
+    let task = await (await Task.findOne({_id : taskId, project_id: projectId , account_id : req.user.account_id._id})).populate('owners','fullname')
     if (!task) return res.status(404).json({error:'task does not exist in '+req.user.account_id.name+' account'})
 
         return res.status(200).json({ 

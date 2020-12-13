@@ -1,20 +1,21 @@
-import React from 'react';
+import React,{useState , useEffect} from 'react';
 
-const SearchProjects = ({SearchWord , goSearch}) => {
+const SearchProjects = ({SearchWord , goSearch, id, label}) => {
+
+
     return (
-        <div className="container">
+       
 
-            <div className="row">
-                <div className="input-field col s12 m11 l4 offset-l4 search-bar-box" >
+       
+                <div className="input-field  search-bar-box" >
                     <i className="material-icons prefix">search</i>
-                    <input type="text" name="Search-bar" id="Search-bar" 
-                        value={SearchWord} onChange={goSearch}/>
+                    <input type="text" name={"Search-bar"+id} id={"Search-bar"+id} 
+                        value={SearchWord && SearchWord.id === id.toString() && SearchWord.value?
+                            SearchWord.value:''} onChange={goSearch} />
                     
-                    <label htmlFor="Search-bar" className="blue-grey-text   text-darken-4">Search Project Name</label>
+                    <label htmlFor={"Search-bar"+id} className="blue-grey-text   text-darken-4">Search {label}</label>
                 </div>
-            </div>
-            
-        </div>
+  
     );
 }
 

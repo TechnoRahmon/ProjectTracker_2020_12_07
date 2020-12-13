@@ -46,7 +46,7 @@ const Get_start = () => {
 
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
-                    <h4>Get Start</h4>
+                    <h1>Get Start</h1>
                     </div>
                 </div>
 
