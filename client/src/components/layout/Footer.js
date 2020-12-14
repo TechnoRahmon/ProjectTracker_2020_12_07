@@ -6,62 +6,27 @@ const Footer = () => {
     <footer className="page-footer">
       <div className="container">
         <div className="row">
-          <div className=" colmns">
-            <div className="col l4 offset-l2 s12 footer_list">
-              <ul className="footer_list">
-                <li>
-                  <Link className="grey-text text-lighten-3" to="/skills">
-                   Skills
-                  </Link>
-                </li>
-
-                <li>
-                  {" "}
-                  <Link className="grey-text text-lighten-3" to="/experience">
-                    Experience
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="grey-text text-lighten-3"
-                    to="/certification"
-                  >
-                    Certification
-                  </Link>
-                </li>
-                <li>
-                  <Link className="grey-text text-lighten-3" to="/education">
-                    Education
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="icons">
+          <div className=" col s12 l4 offset-l4 center">
+           
+            <div className="icons ">
               <Link to="#">
                 {" "}
-                <i className="material-icons">facebook</i>
+                <i className="material-icons indigo-text text-darken-2">facebook</i>
               </Link>
               <Link to="#">
                 {" "}
-                <i className="fab fa-twitter"></i>
+                <i className="fab fa-twitter indigo-text text-darken-2"></i>
               </Link>
               <Link to="#">
                 {" "}
-                <i className="fab fa-github"></i>
+                <i className="fab fa-github indigo-text text-darken-2"></i>
               </Link>
               <Link to="#">
                 {" "}
-                <i className="fab fa-linkedin-in"></i>
+                <i className="fab fa-linkedin-in indigo-text text-darken-2"></i>
               </Link>
             </div>
-            <div className="contact_info">
-              <div className="email">
-                <i className="far fa-envelope"></i> email.com
-              </div>
-              <div className="phone">
-                <i className="fas fa-mobile-alt"></i> +78945613
-              </div>
-            </div>
+   
           </div>
         </div>
       </div>

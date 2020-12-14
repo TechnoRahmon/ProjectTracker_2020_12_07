@@ -408,27 +408,24 @@ const SetUpEndDate = (end,id)=>{
                 <div className="task-box-header row indigo darken-4 white-text" >
                       
                         {/* name */}
-                        <div className="name-header-box col s12 l1 offset-l1 ">
+                        <div className="name-header-box col s12 l2 offset-l1 ">
                             <span>Name</span>
                         </div>
 
-                        {/* comments icon */}
-                        <div className="col s12 l2 comments-header-box offset-l2 center">
-                            <span>Comments</span>
-                        </div>
+                    
 
                         {/* owners icon */}
-                        <div className="col s12 l1 center">
+                        <div className="col s12 l3 offset-l1 center">
                              <span>Owners</span>             
                         </div>
 
                         {/* status */}
-                        <div className="col s12 l2  offset-l1  center">
+                        <div className="col s12 l2    center">
                             <span>Status</span>
                         </div>
 
                         {/* timeline */}
-                        <div className="col s12 l1 offset-l1 center">
+                        <div className="col s12 l2 offset-l1 center ">
                                 <span >Timeline</span>
                         </div>    
                 </div>
@@ -460,10 +457,7 @@ const SetUpEndDate = (end,id)=>{
                             
                         </div>
 
-                        {/* comments icon */}
-                        <div className="col s12 l1 center">
-                            <a href="#"><i className="material-icons indigo-text text-darken-4">mode_comment</i></a>
-                        </div>
+                      
 
 
 
@@ -527,9 +521,9 @@ const SetUpEndDate = (end,id)=>{
                        
                        
                         {/* comments icon */}
-                        <div className="col s12 l1  center">
+                        {/* <div className="col s12 l1  center">
                             <a href="#"><i className="material-icons indigo-text text-darken-4">mode_comment</i></a>
-                        </div>
+                        </div> */}
 
 
 

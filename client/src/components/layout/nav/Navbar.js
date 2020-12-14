@@ -14,11 +14,11 @@ const Navbar =({authPath}) => {
   const { isTokenValid , Token , isauthenticated, logout,currentUser } = useContext(AuthContext)
   const history = useHistory()
 
-  // const M = window.M;
-  // document.addEventListener('DOMContentLoaded', function() {
-  //   var elems = document.querySelectorAll('.sidenav');
-  //   var instances = M.Sidenav.init(elems, {});
-  // });
+  const M = window.M;
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {});
+  });
 
   useEffect(()=>{console.log(`cookies `,Token, isauthenticated);
   console.log(isauthenticated, currentUser);
@@ -42,12 +42,12 @@ const Navbar =({authPath}) => {
   <div className="navbar-fixed">
 
     <nav>
-
-      <div className=" indigo accent-4 nav-wrapper">
+{/* deep-purple darken-4 */}
+      <div className="   indigo darken-3 nav-wrapper">
 
         <ul id="nav-mobile" className=" hide-on-med-and-down navbar">
           <li >
-            <NavLink exact activeClassName="activeNav" to="/">Home</NavLink>
+            <NavLink exact  to="/">Home</NavLink>
                       
           </li>
          
@@ -57,17 +57,17 @@ const Navbar =({authPath}) => {
 
   {isauthenticated?
           <li className="right">
-            <NavLink exact to="/auth/login" activeClassName="activeNav" onClick={()=>{logout()}}>
+            <NavLink exact to="/auth/login"  onClick={()=>{logout()}}>
               Logout
             </NavLink>
           </li>
     :(
     <>   
       <li className="right ">
-            <NavLink to="/auth/get-start" activeClassName="activeNav" className="btn red"  onClick={()=>{authPath('/get-start')}}>Get Started</NavLink>
+            <NavLink to="/auth/get-start"  className="btn pink accent-3 getStaredBtn"  onClick={()=>{authPath('/get-start')}}>Get Started</NavLink>
         </li>
        <li className="right">
-            <NavLink exact to="/auth/login" activeClassName="activeNav" onClick={()=>{authPath('/login')}}>
+            <NavLink exact to="/auth/login"  onClick={()=>{authPath('/login')}}>
               Login
             </NavLink>
         </li>
@@ -75,16 +75,14 @@ const Navbar =({authPath}) => {
     )}
 
 
-     <li className="right">
-            <NavLink exact activeClassName="activeNav" to="/projects">Contact Us</NavLink>
-          </li>
+ 
           {/* {isauthenticated? 
           <li className="right">{currentUser.firstname} as Admin 
           <i className="fas fa-sign-out-alt btn-flat btn-large white-text logout-link"  onClick={(e)=>{logout(); history.go(0)}}></i></li>
           :<li> <NavLink to="/login" activeClassName="activeNav">Login</NavLink></li>} */}
         </ul>
             <a href="#" data-target="slide-out" className="sidenav-trigger "><i className="material-icons">menu</i></a>
-      <li className="  center title">Elyas Arkin</li>
+      <li className="  center title">PROJECT TRACKER</li>
       </div>
     </nav>
   </div>
@@ -110,9 +108,26 @@ const Navbar =({authPath}) => {
           <li className="center sidenav-close">
             <Link to="/resumes">Resume</Link>
           </li>
-          <li className="center sidenav-close btn red">
-            <Link to="/about">About Me</Link>
+
+
+        {isauthenticated?
+          <li className="right">
+            <NavLink exact to="/auth/login" activeClassName="activeNav" onClick={()=>{logout()}}>
+              Logout
+            </NavLink>
           </li>
+    :(
+    <>   
+      <li className="right ">
+            <NavLink to="/auth/get-start" activeClassName="activeNav" className="btn red"  onClick={()=>{authPath('/get-start')}}>Get Started</NavLink>
+        </li>
+       <li className="right">
+            <NavLink exact to="/auth/login" activeClassName="activeNav" onClick={()=>{authPath('/login')}}>
+              Login
+            </NavLink>
+        </li>
+    </>       
+    )}
 
        
           {/* {isauthenticated? 

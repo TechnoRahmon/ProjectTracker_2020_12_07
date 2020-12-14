@@ -12,30 +12,7 @@
 */
 
 
-/**** Home ********/
-main{
-    height: auto;
-}
 
-.home {
-        background-image:linear-gradient(rgba(39, 39, 39, 0.274), rgba(39, 39, 39, 0.397)),
-        url("https://images.unsplash.com/photo-1604798676621-1367601dee73?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80");
-        background-size: cover;
-        background-position: top;
-        background-repeat: no-repeat;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-        padding-top : 30px;
-        margin:0px !important; 
-        
-        
-    /* background-color: rgba(238, 238, 238, 0.822); */
-    
-}
 .container {
     max-width: 100% !important;
     position: relative !important;
@@ -316,7 +293,8 @@ main{
 /******* Tasks List   ******/
 
 .task-box-header{
-    padding:10px 0px ;
+    padding:10px 0px 10px 40px ;
+
     border-radius: 10px;
 }
 
@@ -534,8 +512,11 @@ main{
 
  .page-footer {
      background-color: #1d2031;
+     padding-top:60px !important ;
+     padding-bottom:30px !important ;
  } 
 .colmns {
+   
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 15px;

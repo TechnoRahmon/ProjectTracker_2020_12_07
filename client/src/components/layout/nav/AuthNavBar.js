@@ -24,9 +24,9 @@ const AuthNavbar =() => {
 
       <div className="  nav-wrapper  white ">
 
-        <ul id="nav-mobile" className="grey-text text-darken-4 hide-on-med-and-down ">
+        <ul id="nav-mobile" className="grey-text AuthNav text-darken-4 hide-on-med-and-down ">
           <li >
-            <NavLink exact  to="/" className="grey-text text-darken-4">Home</NavLink>
+            <NavLink exact  to="/" className="grey-text text-darken-4 AuthnavLink">Home</NavLink>
                       
           </li>
        
