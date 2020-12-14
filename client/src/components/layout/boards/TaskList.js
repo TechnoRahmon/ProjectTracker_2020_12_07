@@ -113,14 +113,14 @@ const TaskList = ({projectId}) => {
 
 
 /*************************Effect Hooks ************ ********** */
-
+const [projErr , setProjErr ] = useState('')
         useEffect(()=>{
            // viewProject(match.params.projectId)
             getTasks(projectId)
-        
+            if(ProjectError) setProjErr(ProjectError)
             //console.log(projectId);
              
-        },[projectId])
+        },[projectId,ProjectError])
 
 
 
@@ -130,7 +130,7 @@ const TaskList = ({projectId}) => {
                 setSearchWord(tasksIds)   
             }
             //console.log(`UpdatedTask`,UpdatedTask);
-            console.log(tasks)
+            //console.log(tasks)
         },[tasks,UpdatedTask])
 
 
@@ -187,6 +187,7 @@ const TaskList = ({projectId}) => {
         const _ClearErrorLabel=(e)=>{
             ClearTaskError()
             setErr('');
+            setProjErr('')
         }
 /************************************************************** */
 
@@ -378,16 +379,7 @@ const SetUpEndDate = (end,id)=>{
          </div>:null
      } 
 
-             {ProjectError?
-           
-           <div className="error-label "  >
-            <h3 className="card z-depth-3">{ProjectError}
-           
-           <button className="btn-flat right errorBtn waves-effect waves-light"><i className="material-icons   " onClick={_ClearErrorLabel}>close</i></button> 
-            </h3>
-            
-         </div>:null
-     } 
+
              <div className="col  s12 l2 offset-l6">
                     <button   className="btn  indigo darken-4 waves-effect waves-light" onClick={()=>{addtask(projectId)}}>
                        <span> Add Task</span> <i className="material-icons">add</i>

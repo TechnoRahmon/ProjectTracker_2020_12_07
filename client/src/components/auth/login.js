@@ -47,11 +47,11 @@ const Login = () => {
         
     }
     return (
-        <div className="container">
+        <div className="container confirmContainer">
 
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
-                    <h1>Login</h1>
+                    <h1 className="center">Login</h1>
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@ const Login = () => {
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
                         {/* error message */}
-                        <div>{error?( <div id="error" className="alert-p" ><span> {error} </span>
+                        <div>{error?( <div id="error" className="center alert-p" ><span> {error} </span>
                             <button onClick={clearError} className="btn-floating btn-small red" style={{marginLeft:"10px"}}> X</button></div>):null}
                         </div>
                     </div>
@@ -91,9 +91,10 @@ const Login = () => {
                                 <p className="alert-p" id="demo"></p>
                             </div>
 
-                            <div className="input-field">
+                            <div className="input-field center">
                                 <button className="btn blue darken-2 z-depth-0">Login</button>
-                                <span className="right">
+                                <br/>
+                                <span className="right linkSpan">
                                      <h6>Don't Have an account...
                                     <Link to="/auth/get-start" onClick={cleanStateError}>Regiser</Link>
                                     </h6>
@@ -108,6 +109,17 @@ const Login = () => {
 
             </div>
   
+
+
+            <div className="divider dividerConfirm"></div>
+
+
+            <div className="row">
+                <div className="col s12 l6 offset-l2 m12 center">
+                <p className="invitDes"> you need invitation from account's admin to be able to login into <b>PROJECT TRACKER</b> account.</p> 
+                </div>
+            </div>
+
             
         </div>
     );

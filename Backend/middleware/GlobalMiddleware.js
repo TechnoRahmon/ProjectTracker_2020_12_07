@@ -44,8 +44,8 @@ const AllowIfLogin = async (req,res,next)=>{
         
     try {
         const user = res.locals.loggedInUser;
-        //console.log(`user : `,user[0])
-        if(!user) return res.status(401).json({success:false,  error:'You need to logged in to access this route'})
+       // console.log(`user : `,user[0])
+        if(!user) return res.status(401).json({success:false,  error:'You Need To Login To Have Access'})
             req.user = user[0];
             next()
 

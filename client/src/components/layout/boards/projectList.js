@@ -22,17 +22,17 @@ const ProjectList = () => {
         getProjects(); //get data from database
         //StartLoading(); // turn isLoading to true
         setProj(projects);
-        if (error) {
-          console.log("Error: ", error);
-          setErr(error);
-        }
+        // if (error) {
+        //   console.log("Error: ", error);
+        //   setErr(error);
+        // }
        // console.log( projects);
        
         // console.log("SearchWord: ",searchWord)
       }, [error, proj,searchWord]);
 
       useEffect(()=>{
-        setErr(error)
+        //setErr(error)
       },[err])
 
 
@@ -44,12 +44,12 @@ const ProjectList = () => {
 
     return (
         <ul className="col s12 l1 left  proj-list ">
-           {err?
+           {error?
            
               <div className="error-label "  >
-               <h3 className="card z-depth-3">{err}
+               <h3 className="card z-depth-3">{error}
               
-              <button className="btn-flat right errorBtn waves-effect waves-light"><i className="material-icons   " onClick={_ClearErrorLabel}>close</i></button> 
+              <button className="btn-flat right errorBtn waves-effect waves-light"><i className="material-icons   " onClick={ClearError}>close</i></button> 
                </h3>
                
             </div>:null

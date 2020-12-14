@@ -3,7 +3,7 @@
 /*
     colors 
   purple:   #5e35b1 deep-purple darken-1
-                            purple darken-4
+            #4a148c      purple darken-4
   dark grey #212121 grey darken-4
 
   indigo darken-4
@@ -138,6 +138,52 @@ main{
     
 }
 
+/* vertical Nav Account DropDown Menu */
+
+.AccountDropMenu{
+    position: absolute;
+    bottom:30px;
+    left:80px;
+    
+    background-color: red;
+    border:0px !important;
+    box-shadow: none !important;
+    color:#fff !important;
+    width:150px;
+    z-index: 1;
+    display: none ; 
+    
+}
+.AccountDropMenu:hover{
+    display: block;
+}
+.hoverDropMenu:hover .AccountDropMenu{
+    display: block;
+}
+
+.AccountMenu{
+    background-color: #1a227eef;
+    display: flex;
+    justify-content: center;
+    width:150px !important;
+    margin-left: auto;
+}
+
+.AccountMenu li{
+        padding:5px 15px;
+        width: 100% !important;
+        text-align: center;
+}
+
+.AccountMenu li:hover{
+    background-color: #4a148c;
+}
+
+/**********************************/
+
+
+
+
             /**    invite box  **/
 
 .invite-box{
@@ -204,8 +250,14 @@ main{
 .RadioForm{
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     margin:0!important;
     padding:0!important;
+}
+.radioFlex{
+    display: flex;
+    justify-content: space-around;
+    font-size: x-large !important;
 }
 .invite-box h3{
     width:80%;
@@ -216,6 +268,8 @@ main{
     width:30%;
     align-self: flex-start;
     font-size: large;
+    height: 45px !important;
+    padding:5px !important;
 }
 
 .vert-nav-box li .icons{
@@ -518,16 +572,31 @@ main{
 .overviewContainer{
     overflow: auto;
 }
+.captiopnOverviewTitle{
+  
+    
 
+}
+.captiopnOverviewTitle-box{
+      display: flex;
+    align-items:center !important;
+   padding-top : 40px !important;
+}
 .overView{
     margin:40px auto !important;
 }
-
+.UserStatus{
+    width:80%!important;
+    align-self: flex-end;
+    margin:0!important;
+    
+}
 .overviewTitle{
     padding-bottom: 40px;
     width:80% !important;
     border-radius: 10px;
     margin:40px auto;
+
 }
 .overveiwDivider{
     width:80%;
@@ -550,6 +619,84 @@ main{
     margin-bottom: 40px;
 }
 /***************************************************************/
+
+
+/*********    Board Manger        *******/
+
+.MangerContainer{
+    width:90% !important;
+    border-radius: 30px;
+    margin-top:20px !important;
+    overflow: auto;
+    height: 95vh;
+}
+
+.MangerRow{
+   
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    width:90% !important;
+    margin-top:20px !important;
+}
+
+.colManger{
+    margin-left: 50px !important;
+}
+
+
+.MangerTabs{
+        width:100%!important;
+        margin:0px auto 40px auto!important;
+        border-top-left-radius: 10px;
+         border-top-right-radius: 10px;
+}
+
+.EditIconBox{
+    width:20% !important;
+}
+
+
+.selectTitle {
+    color:#fff !important; 
+    
+}
+
+.editBox{
+   display: none;
+    justify-content: center !important;
+    width:165% !important;
+    margin:0 auto !important;
+    align-items: center; 
+    border-radius: 20px;
+    
+}
+ .gap{
+    width:5%;
+}
+
+.edit-Box-1{
+   flex:1
+
+}
+.edit-Box-1 p{
+    margin-left: 25px !important;
+    margin-bottom: 50px !important;
+
+}
+.desFlexBox{
+
+    padding-top:30px !important;
+}
+.edit-Box-2{
+    flex:1;
+}
+
+
+
+
+
+
+
 
 /***************** Media Query *************************/
 

@@ -46,6 +46,7 @@ app.use(async(req,res,next)=>{
               // retrive the token 
               const accesstoken = req.cookies['token']
               const { userId  } = await jwt.verify(accesstoken,process.env.TOKEN)
+              //console.log(`userId: `,userId);
               // if token has expired 
                 
                 res.locals.loggedInUser = await User.find({_id : userId}).populate('account_id','name')

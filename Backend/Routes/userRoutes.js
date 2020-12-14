@@ -21,7 +21,7 @@ Router
 
 
 Router
-    .route('/users/:userId')
+    .route('/:accountId/users/:userId')
         // accepting invitation   : public
         .put(userVerficationValidator,UserController.userAccecptInvitation)
 

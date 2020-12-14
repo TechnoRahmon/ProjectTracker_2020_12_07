@@ -11,7 +11,7 @@ const Get_start = () => {
 
     const history = useHistory()
     //importing from AuthProvider 
-    const {login, isauthenticated, error , cleanStateError } = useContext(AuthContext)
+    const {addNewAccount, isauthenticated, error , cleanStateError } = useContext(AuthContext)
     const [email , setEmail ] = useState('')
     const [pass , setPass ] = useState('')
     const [err , setErr ] = useState('')
@@ -20,15 +20,21 @@ const Get_start = () => {
 
 
     useEffect(() => {
-        if(isauthenticated)history.push('/')
+        if(isauthenticated)history.push('/boards')
         if(error) setErr(error)
     }, [error,isauthenticated,history]);
 
 
-    const newLogin = {email : email.toLowerCase() , password:pass}
+    const newUser = {
+        email : email.toLowerCase(),
+        password:pass,
+        fullname:fullname,
+        accountname : accountName}
+    
+    
     const _handelSub =(e)=>{
             e.preventDefault(); 
-            login(newLogin)
+            addNewAccount(newUser)
     }
 
     const clearError=(e)=>{
@@ -42,19 +48,23 @@ const Get_start = () => {
 
 
     return (
-          <div className="container">
+          <div className="container confirmContainer">
 
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
-                    <h1>Get Start</h1>
+                    <h1 className="center">Get Start</h1>
                     </div>
                 </div>
 
-
+        <div className="row center">
+            <div className="col s12 l6 offset-l2 m12">
+                <h4>Create Your New Account!</h4>
+            </div>
+        </div>
                 <div className="row">
                     <div className="col s12 l6 offset-l2 m12">
                         {/* error message */}
-                        <div>{error?( <div id="error" className="alert-p" ><span> {error} </span>
+                        <div>{error?( <div id="error" className="alert-p center" ><span> {error} </span>
                             <button onClick={clearError} className="btn-floating btn-small red" style={{marginLeft:"10px"}}> X</button></div>):null}
                         </div>
                     </div>
@@ -93,9 +103,10 @@ const Get_start = () => {
                             </div>
 
 
-                            <div className="input-field">
-                                <button className="btn blue darken-2 z-depth-0">Login</button>
-                                <span className="right">
+                            <div className="input-field center ">
+                                <button className="btn blue darken-2 z-depth-0 ">Get Start</button>
+                                <br/>
+                                <span className="right linkSpan">
                                      <h6>Already Have an account....
                                     <Link to="/auth/login" onClick={cleanStateError}>Login</Link>
                                     </h6>

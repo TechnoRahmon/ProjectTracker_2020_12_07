@@ -42,7 +42,7 @@ async function isEmailExistInAccount(email,account_name){
         //console.log('acc : ', account._id);
         const user =await Users.find({ email : email , account_id: account._id}).populate('account_id','name') ;
         //console.log('inner func :',user);
-        if (user) return user
+        if (user.length) return user
         return false
 }
 
@@ -129,7 +129,7 @@ exports.addUserDetails = async (req, res ,next)=>{
         const account = await createAccount(accountname)
         if (account.error) return res.status(500).json({ success:false, error : 'Server Error : '+account.error})
         if (account.exist) return res.status(400).json({ success:false , msg:'The Account Name is already registered'})
-
+        //console.log(account.id);
         //hash password
         const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(password, salt);
@@ -146,8 +146,17 @@ exports.addUserDetails = async (req, res ,next)=>{
 
         const savedUser = await newUser.save(); 
         
-        
-        return res.status(200).json({ success:true , data: savedUser})
+           //generate token 
+           const token = jwt.sign({userId : savedUser._id.toString() }, process.env.TOKEN , { algorithm:"HS256"} )
+           // setup cookies 
+           res.cookie('token',token )
+
+
+        return res.status(200).json({ success:true ,token, data:{  id:savedUser._id,
+            fullname:savedUser.fullname , 
+            image_path: savedUser.image_path, 
+            user_type :savedUser.user_type,
+            account:savedUser.account_id, }})
     }
     catch(err){
         if ( err.name == 'ValidationError') return res.status(400).json({ success:false, error : 'Server Error'+err})
@@ -196,7 +205,7 @@ exports.inviteUser = async (req, res ,next)=>{
             }else{
 
         // setup invitation variable
-        res.locals.inviteUser = { userID :user[0]._id, email, savedUser:user}
+        res.locals.inviteUser = { userID :user[0]._id, email, savedUser:user[0] }
 
         next()
             }
@@ -243,7 +252,7 @@ exports.sendInvitation= async (req, res ,next)=>{
             subject: `[ProjectTracker] ${req.user.fullname} has invited you to ${req.user.account_id.name}'s ProjectTracker account`,
             // here should we send end point to react route to complete the registration
             text: `${req.user.name} has invited you to ProjectTracker\n\n
-                    accept the invitation go to : ${req.headers.host}/users/${userID} `,
+                    accept the invitation go to : http://localhost:3000/auth/${req.user.account_id.name}/${req.user.account_id._id}/confirm/user/${userID} `,
             html:`<!DOCTYPE html>
             <html><body>
             
@@ -251,7 +260,7 @@ exports.sendInvitation= async (req, res ,next)=>{
                     background-color: rgb(245, 245, 245);margin:50px auto 0 auto; padding:45px;">
                     <h2 style="text-align:center;font-size:32px;width:100%;">${req.user.fullname} has invited you to ProjectTracker </h2><hr><br>
                     <p style="text-align:center; display: flex;justify-self: center;width:80%;" > accept the invitation go to : </p>
-                    <a href="http://${req.headers.host}/users/${userID}"
+                    <a href="http://localhost:3000/auth/${req.user.account_id.name}/${req.user.account_id._id}/confirm/user/${userID}"
                         style="background-color:#fc8621; padding:10px 20px; color:#393e46;text-decoration: none;margin:0 auto; display:inline-block">
                         accept invtation
                         </a></div>
@@ -264,7 +273,7 @@ exports.sendInvitation= async (req, res ,next)=>{
                      
                     <h2 style="text-align:center;font-size:32px;width:100%;">${req.user.fullname} has invited you to ProjectTracker </h2><hr><br>
                     <p style="text-align:center; display: flex;justify-self: center;width:80%;" > accept the invitation go to : </p>
-                    <a href="http://${req.headers.host}/users/${userID}"
+                    <a href="http://localhost:3000/auth/${req.user.account_id.name}/${req.user.account_id._id}/confirm/user/${userID}"
                         style="background-color:#fc8621; padding:10px 20px; color:#393e46;text-decoration: none;margin:0 auto; display:inline-block">
                         accept invtation
                         </a>
@@ -282,7 +291,7 @@ exports.sendInvitation= async (req, res ,next)=>{
         return res.status(200).json({ 
             success:true , 
             msg:"invitation is successfully Send ", 
-            link:`http://${req.headers.host}/users/${userID}` , 
+            link:`http://localhost:3000/auth/${req.user.account_id.name}/${req.user.account_id._id}/confirm/user/${userID}` , 
             data:savedUser })
 
                 })
@@ -309,26 +318,42 @@ exports.userAccecptInvitation = async (req, res ,next)=>{
             return res.status(400).json({ success:false , msg:errors[0].msg })
 
         const {  password , fullname} = req.body; 
-        const { userId } = req.params;
+        const { userId , accountId } = req.params;
 
 
         //hash password
         const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(password, salt);
         
+
         //update user info 
-         
-        const user = await Users.findByIdAndUpdate(id,{
+        const user = await Users.findOne({_id :userId , account_id:accountId ,verified:false })
+               // console.log(user);
+        if (!user) return res.status(404).json({ success:false, error : 'You have Wrong Invitation ID Or You are Already Registered'})
+
+        await user.updateOne(
+            {
             fullname : fullname, 
             password : passwordHash,
-            verified:true,
-        })
+            verified:true,}) 
+
 
         
+        const VerifiedUser =  await Users.findOne ({_id :userId}).populate('account_id','name')
         
-        
-        return res.status(200).json({ success:true , data: await Users.findById(id)})
+        //generate token 
+        const token = jwt.sign({userId : VerifiedUser._id.toString() }, process.env.TOKEN , { algorithm:"HS256"} )
+        // setup cookies 
+        res.cookie('token',token )
+
+        return res.status(200).json({ success:true ,token, 
+            data:{  id:VerifiedUser._id,
+                fullname:VerifiedUser.fullname , 
+                image_path: VerifiedUser.image_path, 
+                user_type :VerifiedUser.user_type,
+                account:VerifiedUser.account_id, }})
     }
+
     catch(err){
         if ( err.name == 'ValidationError') return res.status(400).json({ success:false, error : 'Server Error'+err})
         console.log(err)
@@ -400,10 +425,7 @@ exports.userLogin = async (req, res ,next)=>{
 
 exports.logout = async (req,res,next)=>{
     // Set token to none and expire after 5 seconds
-    res.cookie('token', 'none', {
-        expires: new Date(Date.now() + 1 * 1000),
-        httpOnly: true,
-        })
+    res.cookie('token', '')
 
         res.status(200).json({ success:true, msg:'User logged out successfully'})
 }
@@ -434,13 +456,14 @@ exports.isTokenValid = async(req,res,next)=>{
             success:true,
             user:{
                 id:user._id,
-                firstname : user.fullname,
+                fullname : user.fullname,
                 account: user.account_id,
                 user_type :user.user_type,
             }
         })
     }
     catch(err){
+        console.log(err)
         return res.status(500).json({ success:false, error : 'Server Error : '+err})
     }
 }
@@ -453,9 +476,9 @@ exports.isTokenValid = async(req,res,next)=>{
 //@accesss privte AdminUser, and the owner MemberUser
 exports.deleteUser = async (req,res,next)=>{
     try {
-        const {id}  = req.params
-        const user = await Users.find({_id:id , account_id:req.user.account_id._id})
-        //console.log(userId);
+        const {userId}  = req.params
+        const user = await Users.find({_id:userId , account_id:req.user.account_id._id})
+        console.log(userId);
         if (!user.length) return res.status(404).json({error:'User does not exisit in '+req.user.account_id.name})
 
         await user[0].deleteOne()

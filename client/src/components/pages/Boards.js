@@ -12,7 +12,7 @@ const Boards = ({match}) => {
     //view single project and tasks  and comments coutns/ useres count.
     const history = useHistory(); 
     // auth Context
-    const {userDetails, currentUser } = useContext(AuthContext)
+    const {userDetails, currentUser , isTokenValid, Token } = useContext(AuthContext)
     
     // Project Context
     const {currentProject,
@@ -25,7 +25,7 @@ const Boards = ({match}) => {
         } = useContext(ProjectContext)
     const [err , setErr ] =useState('');
     // Task Context
-    const {getTasks,tasks } = useContext(TaskContext)
+    const {tasks } = useContext(TaskContext)
 
 
         // init for dropdown project menu 
@@ -35,11 +35,12 @@ const Boards = ({match}) => {
             viewProject(match.params.projectId)
             //getTasks(match.params.projectId)
             console.log(tasks);  
-            
+            isTokenValid(Token)
             const M  = window.M;
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.dropdown-trigger');
             var instances = M.Dropdown.init(elems, {});
+            //console.log(currentUser);
           });
         },[match.params.projectId])
 
@@ -50,6 +51,7 @@ const Boards = ({match}) => {
 
         // switch to edit mode
         const _showProjectNameInput=(id)=>{
+                //console.log(currentUser);
             if ( currentUser.user_type === 'AdminUser'){
 
             setProjectName(document.getElementById('project-name').innerHTML);

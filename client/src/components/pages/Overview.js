@@ -2,6 +2,7 @@ import React,{ useState, useContext, useEffect } from 'react';
 import projectContext from '../../context/project/projectContext'
 import TaskContext from '../../context/task/taskContext'
 import TaskList from '../layout/boards/TaskList';
+import AuthContext from '../../context/auth/authContext'
 
 const Overview = () => {
 
@@ -11,6 +12,7 @@ const Overview = () => {
     const {error , projects,ClearError, currentProject,getProjects,addProject} = useContext(projectContext);
     const {tasks,getTasks} = useContext(TaskContext);
 
+    const {currentUser , isTokenValid, Token} = useContext(AuthContext);
 
 
 
@@ -19,12 +21,28 @@ const Overview = () => {
         getProjects()
         
     },[])
-console.log(tasks);
+//console.log(currentUser);
 
     return (
     <div className="container overviewContainer indigo lighten-5">
-            <div className="row white overviewTitle">
-                <h1 className="col l4 offset-l1"> Project Overview</h1>
+
+
+
+
+            <div className="row white overviewTitle captiopnOverviewTitle-box">
+                <h1 className="col s12 l4 offset-l1"> Project Overview</h1>
+
+                <div className="col l3  right bottom captiopnOverviewTitle"> 
+
+                    {currentUser.id?( <ul className="collection UserStatus">
+                            <li className="collection-item"><i><b>Account Name: {currentUser.account.name}</b></i></li> 
+                            <li className="collection-item"><i><b>Your Name: {currentUser.fullname}</b></i></li> 
+                            <li className="collection-item"><i><b>Your Privileges: {currentUser.user_type}</b></i></li> 
+                    </ul>
+                    ):null}
+
+                </div>
+
             </div>
             <div className="divider overveiwDivider indigo lighten-2"></div>
            
