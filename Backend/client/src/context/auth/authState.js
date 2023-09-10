@@ -165,7 +165,7 @@ export const AuthState = ({children})=>{
 
         } catch (err) {
             console.log(err);
-            dispatch({ type:INVITE_ERROR , payload: err.response.data.msg  })
+            dispatch({ type:INVITE_ERROR , payload: err.response.data.message  })
         }
     }
 

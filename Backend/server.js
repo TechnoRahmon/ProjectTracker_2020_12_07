@@ -20,7 +20,6 @@ connectDB()
 //link morgan 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
-
 //include body-parser and cookieparser 
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(cookieParser())

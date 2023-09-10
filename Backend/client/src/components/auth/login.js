@@ -13,10 +13,10 @@ const Login = () => {
 
     //importing from AuthProvider 
     const {login, isauthenticated, error , cleanStateError, currentUser} = useContext(AuthContext)
-    const [email , setEmail ] = useState('')
-    const [pass , setPass ] = useState('')
+    const [email , setEmail ] = useState('admin@tracker.com')
+    const [pass , setPass ] = useState('P@ssw0rd')
     const [err , setErr ] = useState('')
-    const [accountName , setAccountName ] = useState('')
+    const [accountName , setAccountName ] = useState('Admin')
 
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const Login = () => {
                 <div className="col s12 l6 offset-l2 ">
 
 
-                    <form onSubmit={_handelSub}  className="white" autoComplete="off" className="login-form">                      
+                    <form onSubmit={_handelSub}  className="white login-form" autoComplete="off">                      
                      
                             {/* input fields */}
                             <div className="input-field">

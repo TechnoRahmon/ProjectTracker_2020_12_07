@@ -89,7 +89,7 @@ const ConfirmInvit = ({match}) => {
                     <div className="col s12 l6 offset-l2 ">
 
 
-                    <form onSubmit={_handelSub}  className="white" autoComplete="off" className="login-form">                      
+                    <form onSubmit={_handelSub}  className="white login-form" autoComplete="off" >                      
                     
                             {/* input fields */}
                             <div className="input-field ">

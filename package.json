@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client":"npm start --prefix client",
-    "Backend":"npm start --prefix Backend",
+    "client": "npm start --prefix Backend/client",
+    "Backend": "npm start --prefix Backend",
     "start": "concurrently \"npm run client\" \"npm run Backend\""
-    
   },
   "author": "",
   "license": "ISC",
