@@ -74,19 +74,11 @@ app.use("/api/v3/", require("./Routes/taskRoutes"));
 // add swagger route
 const specs = swaggerJsdoc(get_SwaggerOptions(process.env.NODE_ENV, PORT));
 app.use(
-  "/api-docs",
+  "/",
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true })
 );
 
-// Catch all requests that don't match any route
-if (process.env.ENV?.trim() == "production") {
-  app.use(express.static("client/build"));
-  // serve up production assets
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 
 app.listen(
   PORT,
