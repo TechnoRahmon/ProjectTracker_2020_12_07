@@ -114,12 +114,10 @@ exports.addUserDetails = async (req, res, next) => {
         .status(500)
         .json({ success: false, error: "Server Error : " + account.error });
     if (account.exist)
-      return res
-        .status(400)
-        .json({
-          success: false,
-          msg: "The Account Name is already registered",
-        });
+      return res.status(400).json({
+        success: false,
+        msg: "The Account Name is already registered",
+      });
     //console.log(account.id);
     //hash password
     const salt = await bcrypt.genSalt(12);
@@ -146,19 +144,17 @@ exports.addUserDetails = async (req, res, next) => {
     // setup cookies
     res.cookie("token", token);
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        token,
-        data: {
-          id: savedUser._id,
-          fullname: savedUser.fullname,
-          image_path: savedUser.image_path,
-          user_type: savedUser.user_type,
-          account: savedUser.account_id,
-        },
-      });
+    return res.status(200).json({
+      success: true,
+      token,
+      data: {
+        id: savedUser._id,
+        fullname: savedUser.fullname,
+        image_path: savedUser.image_path,
+        user_type: savedUser.user_type,
+        account: savedUser.account_id,
+      },
+    });
   } catch (err) {
     if (err.name == "ValidationError")
       return res
@@ -188,15 +184,13 @@ exports.inviteUser = async (req, res, next) => {
     const user = await isEmailExistInAccount(email, req.user.account_id.name);
     //console.log(user);
     if (user.length > 0 && user[0].verified)
-      return res
-        .status(400)
-        .json({
-          success: false,
-          msg:
-            "This Email is already registered in " +
-            req.user.account_id.name +
-            " account",
-        });
+      return res.status(400).json({
+        success: false,
+        msg:
+          "This Email is already registered in " +
+          req.user.account_id.name +
+          " account",
+      });
 
     //console.log(req.user.account_id.name)
 
@@ -245,21 +239,20 @@ exports.sendInvitation = async (req, res, next) => {
   try {
     const { userID, email, savedUser } = res.locals.inviteUser;
     const transporterOptions = {
-        
-      host: process.env.mailtrap_HOST,
-      port: process.env.mailtrap_PORT,
+      host: process.env.MAILTRAP_HOST,
+      port: process.env.MAILTRAP_PORT,
       auth: {
-        user: process.env.mailtrap_USER,
-        pass: process.env.mailtrap_PASSWORD,
+        user: process.env.MAILTRAP_USER,
+        pass: process.env.MAILTRAP_PASSWORD,
       },
-      logger:true,
-      debug:true,
-      secure:false,
-      tls:{
-        rejectUnauthorized:true
-      }
-    }
-    console.log(transporterOptions)
+      logger: true,
+      debug: true,
+      secure: false,
+      tls: {
+        rejectUnauthorized: true,
+      },
+    };
+    console.log(transporterOptions);
     // send invitation , using a SMTP from mailtrap.io, be sure to get the configuration from there.
     var transporter = mailer.createTransport(transporterOptions);
 
@@ -304,7 +297,11 @@ exports.sendInvitation = async (req, res, next) => {
       if (err)
         return res
           .status(400)
-          .json({ success: false, message:"Check the mailtrap settings!", error: "MailError : " + err });
+          .json({
+            success: false,
+            message: "Check the mailtrap settings!",
+            error: "MailError : " + err,
+          });
 
       //console.log("Email Sent: " + info.response);
       return res.status(200).json({
@@ -348,12 +345,10 @@ exports.userAccecptInvitation = async (req, res, next) => {
     });
     // console.log(user);
     if (!user)
-      return res
-        .status(404)
-        .json({
-          success: false,
-          error: "You have Wrong Invitation ID Or You are Already Registered",
-        });
+      return res.status(404).json({
+        success: false,
+        error: "You have Wrong Invitation ID Or You are Already Registered",
+      });
 
     await user.updateOne({
       fullname: fullname,
@@ -375,19 +370,17 @@ exports.userAccecptInvitation = async (req, res, next) => {
     // setup cookies
     res.cookie("token", token);
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        token,
-        data: {
-          id: VerifiedUser._id,
-          fullname: VerifiedUser.fullname,
-          image_path: VerifiedUser.image_path,
-          user_type: VerifiedUser.user_type,
-          account: VerifiedUser.account_id,
-        },
-      });
+    return res.status(200).json({
+      success: true,
+      token,
+      data: {
+        id: VerifiedUser._id,
+        fullname: VerifiedUser.fullname,
+        image_path: VerifiedUser.image_path,
+        user_type: VerifiedUser.user_type,
+        account: VerifiedUser.account_id,
+      },
+    });
   } catch (err) {
     if (err.name == "ValidationError")
       return res
@@ -418,12 +411,10 @@ exports.userLogin = async (req, res, next) => {
     //console.log(user);
 
     if (!user.length)
-      return res
-        .status(400)
-        .json({
-          success: false,
-          msg: "This Email is Not registered in " + account_name + " account",
-        });
+      return res.status(400).json({
+        success: false,
+        msg: "This Email is Not registered in " + account_name + " account",
+      });
 
     // is the passwords matched  (new pwd , old pwd )
     const isMatched = await isPwdsMatched(password, user[0].password);
