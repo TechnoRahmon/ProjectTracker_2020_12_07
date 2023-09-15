@@ -2,7 +2,7 @@ const get_SwaggerOptions = (ENV = "development", port) => {
   const serverUrl =
     ENV == "development"
       ? `http://localhost:${port}`
-      : "https://techno-expense-tracker-80692413a6b0.herokuapp.com";
+      : "https://projecttracker-technorahmon.b4a.run";
 
   return {
     definition: {
@@ -18,7 +18,7 @@ const get_SwaggerOptions = (ENV = "development", port) => {
         },
         contact: {
           name: "Techno Project Tracker",
-          url: "https://github.com/TechnoRahmon/ProjectTracker_2020_12_07",
+          url: "https://github.com/TechnoRahmon/ProjectTracker_2020_12_07/tree/project-tracker-backend",
           email: "techno.r@outlook.com",
         },
       },
