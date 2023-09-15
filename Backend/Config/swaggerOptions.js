@@ -17,7 +17,7 @@ const get_SwaggerOptions = (ENV = "development", port) => {
           url: "https://spdx.org/licenses/MIT.html",
         },
         contact: {
-          name: "Techno Expense Tracker",
+          name: "Techno Project Tracker",
           url: "https://github.com/TechnoRahmon/ProjectTracker_2020_12_07",
           email: "techno.r@outlook.com",
         },

@@ -353,56 +353,78 @@ Router.route("/:accountId/users/:userId")
  *     security:
  *       - BearerAuth: []
  *     responses:
- *       204:
+ *       200:
  *         description: User deleted successfully
- *       401:
- *         description: Unauthorized (user not logged in)
- *       403:
- *         description: Forbidden (user does not have permission to delete)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data: null
+ *                 message:
+ *                   type: string
+ *                   example: User has been deleted
+ *       404:
+ *         description: Not Found (user not found in the account)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserErrorResponse'
  *       500:
  *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserErrorResponse'
  */
 
 /**
  * @swagger
  * /api/v1/user/{userId}:
  *   put:
- *     summary: Update a user profile
+ *     summary: Update user role
  *     tags: [Users]
- *     description: Privileged operation to update a user's profile information.
+ *     description: Update the role of a user by ID (AdminUser or MemberUser).
  *     parameters:
  *       - in: path
  *         name: userId
+ *         description: The ID of the user to be updated.
  *         required: true
- *         description: ID of the user to update
  *         schema:
  *           type: string
- *     security:
- *       - BearerAuth: []
  *     requestBody:
- *       description: User profile data to update
+ *       description: User role data to update.
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             type: object
+ *             properties:
+ *               role:
+ *                 type: string
+ *                 description: The new role for the user (AdminUser or MemberUser).
+ *                 example: AdminUser
  *     responses:
  *       200:
- *         description: User profile updated successfully
+ *         description: User role updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   $ref: '#/components/schemas/User'
  *       400:
- *         description: Bad request, invalid user profile data
+ *         description: Bad request, invalid user role data
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/UserErrorResponse'
- *       401:
- *         description: Unauthorized (user not logged in)
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/UserErrorResponse'
- *       403:
- *         description: Forbidden (user does not have permission to update)
+ *       404:
+ *         description: Not Found (user not found in the account)
  *         content:
  *           application/json:
  *             schema:
@@ -543,9 +565,55 @@ Router.route("/logout").get(UserController.logout);
  *     summary: Check if token is valid
  *     responses:
  *       200:
- *         description: Token is valid
+ *         description: Token is valid, and user information retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates whether the token is valid (true) or not (false).
+ *                 user:
+ *                   type: object
+ *                   description: User information if the token is valid.
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: The ID of the user.
+ *                     fullname:
+ *                       type: string
+ *                       description: The full name of the user.
+ *                     account:
+ *                       type: object
+ *                       properties:
+ *                         id:
+ *                           type: string
+ *                           description: The ID of the user's account.
+ *                         name:
+ *                           type: string
+ *                           description: The name of the user's account.
+ *                     user_type:
+ *                       type: string
+ *                       description: The type of the user (AdminUser or MemberUser).
  *       401:
- *         description: Token is invalid
+ *         description: Unauthorized (token not provided or invalid)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: boolean
+ *               description: Indicates that the token is not valid (false).
+ *               example: false
+ *       404:
+ *         description: Not Found (user not found)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: boolean
+ *               description: Indicates that the user was not found (false).
+ *               example: false
+ *       500:
+ *         description: Internal server error
  *         content:
  *           application/json:
  *             schema:
