@@ -240,42 +240,88 @@ Router.route("/users/invite")
 
 /**
  * @swagger
- * /api/v1/{accountId}/users/{userId}:
+ * /api/v1/users/{accountId}/{userId}/accept-invitation:
  *   put:
- *     summary: Accept user invitation
+ *     summary: Complete user registration after accepting an invitation
  *     tags: [Users]
- *     description: Public endpoint to accept a user invitation by verifying the user's identity.
+ *     description: Admin can complete user registration by providing a password and full name.
  *     parameters:
  *       - in: path
  *         name: accountId
+ *         description: The ID of the user's account.
  *         required: true
- *         description: ID of the account to which the user belongs
  *         schema:
  *           type: string
  *       - in: path
  *         name: userId
+ *         description: The ID of the user accepting the invitation.
  *         required: true
- *         description: ID of the user accepting the invitation
  *         schema:
  *           type: string
  *     requestBody:
- *       description: User verification data
+ *       description: User registration data
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 example: user_password
+ *               fullname:
+ *                 type: string
+ *                 example: John Doe
+ *             required:
+ *               - password
+ *               - fullname
  *     responses:
  *       200:
- *         description: User invitation accepted successfully
+ *         description: User registration completed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 token:
+ *                   type: string
+ *                   example: jwt_token_here
+ *                 data:
+ *                    properties:
+ *                      email:
+ *                        type: string
+ *                        description: Email address of the user.
+ *                      _id:
+ *                        type: string
+ *                        description: id of the user.
+ *                        example: 650446db3a174d348c91555
+ *                      account_id:
+ *                        type: string
+ *                        description: ID of the associated account.
+ *                      user_type:
+ *                        type: string
+ *                        description: Type of user (e.g., ViwerUser, BasicUser, AdminUser).
+ *                        enum: [ViwerUser, BasicUser, AdminUser]
+ *                      verified:
+ *                        type: boolean
+ *                        description: Indicates whether the user is verified.
  *       400:
- *         description: Bad request, invalid user verification data
+ *         description: Bad request, invalid user registration data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserErrorResponse'
+ *       401:
+ *         description: Unauthorized (user not logged in)
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/UserErrorResponse'
  *       404:
- *         description: Account or user not found
+ *         description: Not Found (invalid invitation ID or user already registered)
  *         content:
  *           application/json:
  *             schema:
