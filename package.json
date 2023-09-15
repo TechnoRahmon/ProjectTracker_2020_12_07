@@ -1,16 +1,40 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project to is about to make a dynamic portfolio that it represente our :  (skills, experience, education, certifications)add we can add new project dynamicly without edit our code.",
   "main": "index.js",
   "scripts": {
-    "client": "npm start --prefix Backend/client",
-    "Backend": "npm start --prefix Backend",
-    "start": "concurrently \"npm run client\" \"npm run Backend\""
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechnoRahmon/Portfolio-2020-11-26.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TechnoRahmon/Portfolio-2020-11-26/issues"
+  },
+  "homepage": "https://github.com/TechnoRahmon/Portfolio-2020-11-26#readme",
   "dependencies": {
-    "concurrently": "^5.3.0"
+    "accesscontrol": "^2.2.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.7.0",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.16",
+    "mongoose-type-email": "^1.1.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.16",
+    "nodemon": "^2.0.6",
+    "path": "^0.12.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   }
 }
