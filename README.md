@@ -54,7 +54,7 @@ The server will start on the specified port (default: 5000). You can access the 
 ## Live Demo
 
 You can explore our project's Swagger documentation with a live demo by visiting the following link:
-[Swagger Demo]([https://your-swagger-demo-link](https://projecttracker-technorahmon.b4a.run))
+[Swagger Demo](https://projecttracker-technorahmon.b4a.run)
 
 ## Using Mailtrap for User Invitation
 
